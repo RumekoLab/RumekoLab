@@ -476,7 +476,6 @@
 
     <!-- HERO SECTION -->
     <header>
-        <!-- Canvas Hero: Mezcla multicolor -->
         <canvas class="particles-canvas" data-colors="#f783ac,#b197fc,#74c0fc,#63e6be,#ffd43b,#ffa94d"></canvas>
         <div class="hero-content">
             <div class="mascot-avatar">
@@ -490,7 +489,6 @@
 
     <!-- SERVICIOS SECTION -->
     <section id="servicios" class="services">
-        <!-- Canvas Servicios: Tonos celestes, verdes y azules -->
         <canvas class="particles-canvas" data-colors="#74c0fc,#63e6be,#3bc9db,#a5d8ff"></canvas>
         <div class="container">
             <h2 class="section-title brand-font">¿QUÉ HACEMOS?</h2>
@@ -516,7 +514,6 @@
 
     <!-- GALERÍA SECTION -->
     <section id="galeria" class="gallery-section">
-        <!-- Canvas Galería: Tonos violetas, púrpuras y rosas pastel -->
         <canvas class="particles-canvas" data-colors="#b197fc,#f783ac,#eebefa,#fcc2d7"></canvas>
         <div class="container">
             <h2 class="section-title brand-font">NUESTROS TRABAJOS</h2>
@@ -543,7 +540,6 @@
 
     <!-- FOOTER / CONTACTO SECTION -->
     <footer id="contacto">
-        <!-- Canvas Contacto: Tonos amarillos, naranjas y verde claro -->
         <canvas class="particles-canvas" data-colors="#ffd43b,#ffa94d,#63e6be,#ffec99"></canvas>
         <div class="container">
             <h2 class="brand-font">¿TENÉS UNA IDEA EN MENTE?</h2>
@@ -572,7 +568,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE PARTÍCULAS MULTI-SECCIÓN -->
+    <!-- SCRIPT DE PARTÍCULAS MULTI-FORMA -->
     <script>
         class Particle {
             constructor(canvasWidth, canvasHeight, colors) {
@@ -580,30 +576,86 @@
                 this.canvasHeight = canvasHeight;
                 this.x = Math.random() * canvasWidth;
                 this.y = Math.random() * canvasHeight;
-                this.size = Math.random() * 8 + 4;
-                this.speedY = Math.random() * -0.9 - 0.2;
-                this.speedX = (Math.random() - 0.5) * 0.7;
+                this.size = Math.random() * 8 + 6;
+                this.speedY = Math.random() * -0.8 - 0.2;
+                this.speedX = (Math.random() - 0.5) * 0.6;
                 this.color = colors[Math.floor(Math.random() * colors.length)];
+
+                // Variedad de formas geométricas y pop
+                const shapes = ['circle', 'square', 'triangle', 'star', 'cross'];
+                this.shape = shapes[Math.floor(Math.random() * shapes.length)];
+
+                // Rotación suave para que giren mientras flotan
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = (Math.random() - 0.5) * 0.03;
             }
 
             update() {
                 this.y += this.speedY;
                 this.x += this.speedX;
+                this.angle += this.spin;
 
-                if (this.y < -20) {
-                    this.y = this.canvasHeight + 20;
+                if (this.y < -30) {
+                    this.y = this.canvasHeight + 30;
                     this.x = Math.random() * this.canvasWidth;
                 }
             }
 
             draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+
                 ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
                 ctx.strokeStyle = '#2b2b2b';
-                ctx.lineWidth = 1.5;
+                ctx.lineWidth = 1.8;
+
+                ctx.beginPath();
+                const s = this.size;
+
+                switch (this.shape) {
+                    case 'circle':
+                        ctx.arc(0, 0, s, 0, Math.PI * 2);
+                        break;
+
+                    case 'square':
+                        ctx.rect(-s, -s, s * 2, s * 2);
+                        break;
+
+                    case 'triangle':
+                        ctx.moveTo(0, -s * 1.3);
+                        ctx.lineTo(s * 1.1, s);
+                        ctx.lineTo(-s * 1.1, s);
+                        ctx.closePath();
+                        break;
+
+                    case 'star':
+                        for (let i = 0; i < 5; i++) {
+                            ctx.lineTo(
+                                Math.cos((18 + i * 72) * Math.PI / 180) * s * 1.3,
+                                -Math.sin((18 + i * 72) * Math.PI / 180) * s * 1.3
+                            );
+                            ctx.lineTo(
+                                Math.cos((54 + i * 72) * Math.PI / 180) * (s * 0.55),
+                                -Math.sin((54 + i * 72) * Math.PI / 180) * (s * 0.55)
+                            );
+                        }
+                        ctx.closePath();
+                        break;
+
+                    case 'cross':
+                        const w = s * 0.35;
+                        ctx.moveTo(-w, -s); ctx.lineTo(w, -s); ctx.lineTo(w, -w);
+                        ctx.lineTo(s, -w); ctx.lineTo(s, w); ctx.lineTo(w, w);
+                        ctx.lineTo(w, s); ctx.lineTo(-w, s); ctx.lineTo(-w, w);
+                        ctx.lineTo(-s, w); ctx.lineTo(-s, -w); ctx.lineTo(-w, -w);
+                        ctx.closePath();
+                        break;
+                }
+
+                ctx.fill();
                 ctx.stroke();
+                ctx.restore();
             }
         }
 
@@ -626,9 +678,8 @@
 
             init() {
                 this.particles = [];
-                // Densidad adaptativa según superficie
                 const area = this.canvas.width * this.canvas.height;
-                const particleCount = Math.min(Math.floor(area / 22000), 40);
+                const particleCount = Math.min(Math.floor(area / 24000), 35);
 
                 for (let i = 0; i < particleCount; i++) {
                     this.particles.push(new Particle(this.canvas.width, this.canvas.height, this.colors));
@@ -644,7 +695,6 @@
             }
         }
 
-        // Inicializar sistemas de partículas para todas las secciones
         const particleCanvases = document.querySelectorAll('.particles-canvas');
         const systems = [];
 
@@ -652,14 +702,12 @@
             systems.push(new SectionParticleSystem(canvas));
         });
 
-        // Bucle global de animación
         function animate() {
             systems.forEach(system => system.updateAndDraw());
             requestAnimationFrame(animate);
         }
         animate();
 
-        // Manejo del evento Resize para ajustar tamaños
         window.addEventListener('resize', () => {
             systems.forEach(system => {
                 system.resize();
