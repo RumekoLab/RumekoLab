@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rumeko | Diseño e Impresión 3D</title>
-    <!-- Importamos una fuente moderna y redondeada de Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -28,42 +27,66 @@
             font-family: 'Nunito', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
+            scroll-behavior: smooth; /* Movimiento suave al hacer clic en los botones */
         }
 
         h1, h2, h3 {
             font-family: 'Fredoka', sans-serif;
         }
 
-        /* Encabezado y Hero Section */
+        /* --- SECCIÓN DE INICIO (HERO) CON PARTÍCULAS --- */
         header {
+            position: relative;
             background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-lilac) 100%);
-            padding: 80px 20px;
-            text-align: center;
-            /* Borde redondeado abajo para un toque suave */
-            border-bottom-left-radius: 50% 10%;
-            border-bottom-right-radius: 50% 10%;
+            min-height: 80vh; /* Ocupa el 80% de la pantalla al entrar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Oculta las partículas que salen del borde */
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
+        /* Contenedor del texto para que quede por encima de las partículas */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px); /* Efecto vidrio esmerilado */
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
         header h1 {
-            font-size: 4rem;
+            font-size: 5rem;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
             margin-bottom: 10px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
         header p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: white;
             font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
         }
 
-        /* Botón llamativo */
+        /* Botones del inicio */
+        .cta-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
         .cta-button {
             display: inline-block;
-            margin-top: 20px;
-            padding: 15px 30px;
+            padding: 15px 35px;
             background-color: var(--pastel-yellow);
             color: var(--text-color);
             text-decoration: none;
@@ -79,9 +102,48 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
-        /* Sección de Servicios */
+        /* --- ANIMACIÓN DE PARTÍCULAS --- */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            animation: floatUp 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+        }
+
+        /* Tamaños, posiciones y velocidades de cada partícula */
+        .particles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .particles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .particles li:nth-child(3) { left: 70%; width: 40px; height: 40px; animation-delay: 4s; }
+        .particles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .particles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .particles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+        .particles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .particles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .particles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .particles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-1000px) scale(1.5); opacity: 0; }
+        }
+
+        /* --- SECCIÓN DE SERVICIOS --- */
         .services {
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
         }
 
@@ -102,20 +164,25 @@
 
         .card {
             background: white;
-            padding: 30px;
+            padding: 40px 30px;
             border-radius: 20px;
             width: 300px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border-top: 5px solid var(--pastel-blue);
+            transition: transform 0.3s;
         }
 
-        /* Sección de Galería (Lugares para fotos) */
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* --- GALERÍA --- */
         .gallery-section {
             background-color: var(--pastel-blue);
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
-            border-top-left-radius: 40px;
-            border-top-right-radius: 40px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
         }
 
         .gallery-section h2 {
@@ -126,8 +193,9 @@
         }
 
         .gallery-section p {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             color: white;
+            font-size: 1.1rem;
         }
 
         .gallery-grid {
@@ -140,96 +208,125 @@
 
         .gallery-item {
             background-color: white;
-            padding: 10px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
 
         .gallery-item:hover {
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         .gallery-item img {
             width: 100%;
-            border-radius: 10px;
+            border-radius: 12px;
             object-fit: cover;
-            aspect-ratio: 1 / 1; /* Mantiene las fotos cuadradas */
+            aspect-ratio: 1 / 1; 
         }
 
-        /* Footer */
+        /* --- FOOTER (Acá pedimos el presupuesto) --- */
         footer {
             background-color: var(--pastel-lilac);
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
             color: white;
+        }
+
+        footer h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 12px 30px;
+            background-color: white;
+            color: var(--pastel-lilac);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+
+        .footer-btn:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-    <!-- Encabezado Principal -->
+    <!-- Encabezado Principal (Llamativo y con Partículas) -->
     <header>
-        <h1>Rumeko</h1>
-        <p>Hacemos realidad tus ideas en 3D</p>
-        <a href="#contacto" class="cta-button">¡Pedí tu presupuesto!</a>
+        <!-- Las burbujas flotantes de fondo -->
+        <ul class="particles">
+            <li></li><li></li><li></li><li></li><li></li>
+            <li></li><li></li><li></li><li></li><li></li>
+        </ul>
+
+        <!-- Contenido principal -->
+        <div class="hero-content">
+            <h1>Rumeko</h1>
+            <p>Damos vida a tu imaginación.</p>
+            <div class="cta-container">
+                <a href="#galeria" class="cta-button">Explorar Creaciones</a>
+            </div>
+        </div>
     </header>
 
     <!-- Qué hacemos -->
     <section class="services">
-        <h2>¿Qué hacemos?</h2>
+        <h2>Lo que nos apasiona</h2>
         <div class="service-cards">
             <div class="card" style="border-color: var(--pastel-pink);">
                 <h3>Diseño 3D</h3>
-                <p>Modelamos tus ideas desde cero. Vos lo imaginas, nosotros lo diseñamos.</p>
+                <p>Modelamos tus ideas desde cero. Vos lo imaginas, nosotros le damos forma.</p>
             </div>
             <div class="card" style="border-color: var(--pastel-lilac);">
                 <h3>Impresión 3D</h3>
-                <p>Materializamos tus proyectos con la mejor calidad en filamento o resina.</p>
+                <p>Materializamos tus proyectos con máxima precisión y acabados increíbles.</p>
             </div>
             <div class="card" style="border-color: var(--pastel-yellow);">
                 <h3>Regalos y Deco</h3>
-                <p>Figuras personalizadas, macetas, mates y artículos únicos para regalar.</p>
+                <p>Figuras únicas, macetas, mates y artículos 100% personalizados.</p>
             </div>
         </div>
     </section>
 
-    <!-- Galería (Acá van tus fotos) -->
-    <section class="gallery-section">
+    <!-- Galería -->
+    <section id="galeria" class="gallery-section">
         <h2>Nuestros Trabajos</h2>
-        <p>¡Mirá lo que podemos hacer con nuestras impresoras!</p>
+        <p>Un vistazo a lo que sale de nuestras impresoras</p>
         <div class="gallery-grid">
-            <!-- Imagen 1 -->
             <div class="gallery-item">
                 <img src="https://via.placeholder.com/400/ffb7b2/ffffff?text=Tu+Foto+Aqui+1" alt="Trabajo 3D Rumeko">
-                <p style="margin-top: 10px; font-weight: bold;">Maceta Groot</p>
+                <p style="margin-top: 15px; font-weight: bold;">Maceta Groot</p>
             </div>
-            <!-- Imagen 2 -->
             <div class="gallery-item">
                 <img src="https://via.placeholder.com/400/b5ead7/5d5c61?text=Tu+Foto+Aqui+2" alt="Trabajo 3D Rumeko">
-                <p style="margin-top: 10px; font-weight: bold;">Figura Personalizada</p>
+                <p style="margin-top: 15px; font-weight: bold;">Figura Personalizada</p>
             </div>
-            <!-- Imagen 3 -->
             <div class="gallery-item">
                 <img src="https://via.placeholder.com/400/c7ceea/ffffff?text=Tu+Foto+Aqui+3" alt="Trabajo 3D Rumeko">
-                <p style="margin-top: 10px; font-weight: bold;">Soporte Joystick</p>
+                <p style="margin-top: 15px; font-weight: bold;">Soporte Joystick</p>
             </div>
-            <!-- Imagen 4 -->
             <div class="gallery-item">
                 <img src="https://via.placeholder.com/400/fff5ba/5d5c61?text=Tu+Foto+Aqui+4" alt="Trabajo 3D Rumeko">
-                <p style="margin-top: 10px; font-weight: bold;">Llaveros Logo</p>
+                <p style="margin-top: 15px; font-weight: bold;">Llaveros Logo</p>
             </div>
         </div>
     </section>
 
     <!-- Contacto / Pie de página -->
     <footer id="contacto">
-        <h2>Hablemos!</h2>
-        <p style="margin: 15px 0;">Mandanos un mensaje y contanos tu idea.</p>
-        <p>Instagram: @Rumeko3D</p>
-        <p>Email: hola@rumeko.com</p>
+        <h2>¿Tenés una idea en mente?</h2>
+        <p>Hagámosla realidad.</p>
+        <a href="mailto:hola@rumeko.com" class="footer-btn">Pedir Presupuesto</a>
+        <br><br>
+        <p>Instagram: <strong>@Rumeko3D</strong></p>
         <br>
-        <p style="font-size: 0.8rem;">© 2026 Rumeko - Impresiones y Diseño 3D</p>
+        <p style="font-size: 0.8rem; opacity: 0.8;">© 2026 Rumeko - Impresiones y Diseño 3D</p>
     </footer>
 
 </body>
