@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rumeko | Diseño e Impresión 3D</title>
-    <!-- Fuentes de Google -->
+    <!-- Fonts Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-    <!-- Iconos Font Awesome -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -30,7 +30,9 @@
             padding: 0;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: 'Quicksand', sans-serif;
@@ -43,14 +45,14 @@
             font-family: 'Fredoka', sans-serif;
         }
 
-        /* --- NAVEGACIÓN --- */
+        /* --- NAVBAR --- */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
             padding: 12px 6%;
             display: flex;
@@ -117,17 +119,18 @@
             padding: 8px 18px;
             border-radius: 20px;
             transition: all 0.25s ease;
+            border: 2px solid transparent;
         }
 
         .nav-links a:hover {
-            border: 2px solid var(--dark-outline);
+            border-color: var(--dark-outline);
             background-color: var(--pastel-yellow);
         }
 
-        /* --- ENCABEZADO HERO --- */
+        /* --- HERO SECTION --- */
         header {
             position: relative;
-            min-height: 90vh;
+            min-height: 92vh;
             padding: 130px 20px 60px;
             display: flex;
             align-items: center;
@@ -152,7 +155,7 @@
             z-index: 10;
             text-align: center;
             max-width: 700px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
             padding: 50px 30px;
             border-radius: 40px;
@@ -169,6 +172,7 @@
             background: var(--white);
             padding: 5px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            position: relative;
         }
 
         .mascot-avatar img {
@@ -206,6 +210,7 @@
             border-radius: 50px;
             box-shadow: 4px 4px 0px var(--dark-outline);
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .btn-main:hover {
@@ -226,6 +231,8 @@
             font-size: 2.8rem;
             margin-bottom: 50px;
             color: var(--dark-outline);
+            display: inline-block;
+            position: relative;
         }
 
         .service-cards {
@@ -243,6 +250,7 @@
             width: 320px;
             box-shadow: 6px 6px 0px var(--dark-outline);
             transition: all 0.25s ease;
+            text-align: center;
         }
 
         .card:hover {
@@ -311,7 +319,7 @@
 
         .gallery-img {
             width: 100%;
-            height: 220px;
+            height: 230px;
             border-radius: 16px;
             object-fit: cover;
             border: 2px solid var(--dark-outline);
@@ -321,9 +329,10 @@
             margin-top: 12px;
             font-family: 'Fredoka', sans-serif;
             font-size: 1.2rem;
+            color: var(--dark-outline);
         }
 
-        /* --- FOOTER / CONTACTO --- */
+        /* --- FOOTER --- */
         footer {
             background-color: var(--pastel-yellow);
             padding: 70px 20px 30px;
@@ -335,23 +344,32 @@
             margin-bottom: 15px;
         }
 
-        .btn-footer {
-            display: inline-block;
-            margin: 20px 0 30px;
-            padding: 15px 40px;
+        .whatsapp-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 25px 0 35px;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
             background-color: var(--white);
             color: var(--dark-outline);
             border: 3px solid var(--dark-outline);
             border-radius: 50px;
             font-family: 'Fredoka', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-decoration: none;
             box-shadow: 4px 4px 0px var(--dark-outline);
             transition: all 0.2s ease;
         }
 
-        .btn-footer:hover {
-            background-color: var(--pastel-orange);
+        .btn-whatsapp:hover {
+            background-color: var(--pastel-green);
             transform: translate(-2px, -2px);
             box-shadow: 6px 6px 0px var(--dark-outline);
         }
@@ -360,7 +378,7 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 30px;
             flex-wrap: wrap;
@@ -368,17 +386,30 @@
 
         .social-badge {
             background: var(--white);
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 20px;
             border: 2px solid var(--dark-outline);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--dark-outline);
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: 3px 3px 0px var(--dark-outline);
+            transition: all 0.2s ease;
+        }
+
+        .social-badge:hover {
+            background-color: var(--pastel-pink);
+            color: var(--white);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--dark-outline);
         }
 
         .copyright {
             font-size: 0.9rem;
             font-weight: 600;
+            opacity: 0.8;
             border-top: 2px dashed var(--dark-outline);
             padding-top: 20px;
             max-width: 600px;
@@ -388,16 +419,16 @@
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem; }
             .nav-links { display: none; }
+            .whatsapp-options { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVEGACIÓN -->
+    <!-- NAVBAR -->
     <nav>
         <a href="#" class="logo-container">
             <div class="logo-badge">
-                <!-- Reemplazar src por la ruta de tu imagen de logo -->
                 <img src="logoj.jpg" alt="Rumeko Logo">
             </div>
             <span class="logo-text brand-font">RUMEKO</span>
@@ -417,7 +448,7 @@
         </ul>
     </nav>
 
-    <!-- ENCABEZADO CON MAPACHE Y PARTICULAS -->
+    <!-- HERO -->
     <header>
         <canvas id="particles-canvas"></canvas>
         <div class="hero-content">
@@ -437,17 +468,17 @@
             <div class="card">
                 <div class="card-icon"><i class="fa-solid fa-pen-ruler"></i></div>
                 <h3 class="brand-font">Diseño 3D</h3>
-                <p>Modelado de ideas desde cero con alta precisión y detalle.</p>
+                <p>Modelamos tus ideas desde cero. Le damos forma a tus proyectos con la mejor precisión.</p>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fa-solid fa-cube"></i></div>
                 <h3 class="brand-font">Impresión 3D</h3>
-                <p>Materialización de proyectos con acabado impecable y materiales ecológicos.</p>
+                <p>Materializamos tus archivos con acabado impecable y materiales ecológicos de alta calidad.</p>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fa-solid fa-face-smile"></i></div>
                 <h3 class="brand-font">Regalos & Deco</h3>
-                <p>Figuras, macetas y accesorios personalizados para dar vida a tus espacios.</p>
+                <p>Figuras, macetas, accesorios y artículos totalmente personalizados a tu gusto.</p>
             </div>
         </div>
     </section>
@@ -457,15 +488,15 @@
         <h2 class="section-title brand-font">NUESTROS TRABAJOS</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img class="gallery-img" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Macetas">
+                <img class="gallery-img" src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Maceta 3D">
                 <p>MACETAS DECO</p>
             </div>
             <div class="gallery-item">
-                <img class="gallery-img" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Figuras">
-                <p>FIGURAS & FAN ART</p>
+                <img class="gallery-img" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Figura 3D">
+                <p>FIGURAS FAN ART</p>
             </div>
             <div class="gallery-item">
-                <img class="gallery-img" src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Soportes">
+                <img class="gallery-img" src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Soporte Joystick">
                 <p>SOPORTES TECH</p>
             </div>
             <div class="gallery-item">
@@ -475,25 +506,34 @@
         </div>
     </section>
 
-    <!-- CONTACTO -->
+    <!-- FOOTER / CONTACTO -->
     <footer id="contacto">
         <h2 class="brand-font">¿TENÉS UNA IDEA EN MENTE?</h2>
-        <p style="font-weight: 700;">¡Hagámosla realidad juntos!</p>
-        <a href="https://wa.me/123456789" target="_blank" class="btn-footer">
-            <i class="fa-brands fa-whatsapp"></i> PEDIR PRESUPUESTO
-        </a>
+        <p style="font-weight: 700;">¡Escribinos por WhatsApp y coordinemos tu presupuesto!</p>
 
+        <!-- DOS OPCIONES DE WHATSAPP -->
+        <div class="whatsapp-options">
+            <a href="https://wa.me/5492474496130" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem; color: #25D366;"></i> WhatsApp 1 (2474 49-6130)
+            </a>
+            <a href="https://wa.me/5492474406497" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem; color: #25D366;"></i> WhatsApp 2 (2474 40-6497)
+            </a>
+        </div>
+
+        <!-- REDES SOCIALES -->
         <div class="social-bar">
-            <div class="social-badge"><i class="fa-brands fa-instagram"></i> @Rumeko3D</div>
-            <div class="social-badge"><i class="fa-solid fa-envelope"></i> hola@rumeko.com</div>
+            <a href="https://www.instagram.com/rumekolab" target="_blank" class="social-badge">
+                <i class="fa-brands fa-instagram" style="font-size: 1.4rem; color: #E1306C;"></i> @rumekolab
+            </a>
         </div>
 
         <div class="copyright">
-            © 2026 Rumeko - Impresiones y Diseño 3D
+            © 2026 Rumeko - Impresiones y Diseño 3D.
         </div>
     </footer>
 
-    <!-- ANIMACIÓN DE PUNTOS PASTEL DEL LOGO -->
+    <!-- PARTICULAS CON COLORES DEL LOGO -->
     <script>
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
@@ -505,7 +545,6 @@
         resize();
         window.addEventListener('resize', resize);
 
-        // Extraídos del logo: Rosa, Violeta, Celeste, Verde, Amarillo, Naranja
         const logoColors = ['#f783ac', '#b197fc', '#74c0fc', '#63e6be', '#ffd43b', '#ffa94d'];
         const particles = [];
 
@@ -513,7 +552,7 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 8 + 4;
+                this.size = Math.random() * 9 + 4;
                 this.speedY = Math.random() * -1 - 0.2;
                 this.speedX = (Math.random() - 0.5) * 0.8;
                 this.color = logoColors[Math.floor(Math.random() * logoColors.length)];
