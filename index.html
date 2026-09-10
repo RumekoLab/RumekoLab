@@ -4,17 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rumeko | Diseño e Impresión 3D</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* Paleta de colores pasteles */
         :root {
             --pastel-pink: #ffb7b2;
+            --pastel-pink-light: #ffdac1;
             --pastel-blue: #b5ead7;
+            --pastel-blue-dark: #82c9b2;
             --pastel-lilac: #c7ceea;
+            --pastel-lilac-dark: #a2a9d6;
             --pastel-yellow: #fff5ba;
-            --text-color: #5d5c61;
+            --text-color: #4a4a4a;
             --bg-color: #faf9f9;
+            --card-shadow: 0 10px 25px rgba(181, 234, 215, 0.25);
         }
 
         * {
@@ -23,134 +31,204 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Nunito', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            scroll-behavior: smooth; /* Movimiento suave al hacer clic en los botones */
+            overflow-x: hidden;
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, .logo {
             font-family: 'Fredoka', sans-serif;
         }
 
-        /* --- SECCIÓN DE INICIO (HERO) CON PARTÍCULAS --- */
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border-bottom: 2px solid rgba(255,255,255,0.6);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #8378a8;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--pastel-pink);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            color: #6c5ce7;
+            background-color: var(--pastel-yellow);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #8378a8;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2) rotate(5deg);
+            color: var(--pastel-pink);
+        }
+
+        /* --- HERO SECTION --- */
         header {
             position: relative;
-            background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-lilac) 100%);
-            min-height: 80vh; /* Ocupa el 80% de la pantalla al entrar */
+            min-height: 90vh;
+            background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 30%, #c7ceea 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Oculta las partículas que salen del borde */
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            padding: 120px 20px 60px;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
         }
 
-        /* Contenedor del texto para que quede por encima de las partículas */
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px); /* Efecto vidrio esmerilado */
-            padding: 50px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.4);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            font-size: 5rem;
-            color: white;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
-            margin-bottom: 10px;
-            letter-spacing: 3px;
-        }
-
-        header p {
-            font-size: 1.5rem;
-            color: white;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
-        }
-
-        /* Botones del inicio */
-        .cta-container {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 35px;
-            background-color: var(--pastel-yellow);
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-
-        /* --- ANIMACIÓN DE PARTÍCULAS --- */
-        .particles {
+        /* Canvas / Background particles */
+        #particles-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
+            pointer-events: none;
         }
 
-        .particles li {
-            position: absolute;
-            display: block;
-            list-style: none;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.5);
-            animation: floatUp 25s linear infinite;
-            bottom: -150px;
-            border-radius: 50%;
-        }
-
-        /* Tamaños, posiciones y velocidades de cada partícula */
-        .particles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-        .particles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-        .particles li:nth-child(3) { left: 70%; width: 40px; height: 40px; animation-delay: 4s; }
-        .particles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-        .particles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-        .particles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
-        .particles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
-        .particles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
-        .particles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
-        .particles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-1000px) scale(1.5); opacity: 0; }
-        }
-
-        /* --- SECCIÓN DE SERVICIOS --- */
-        .services {
-            padding: 80px 20px;
+        .hero-card {
+            position: relative;
+            z-index: 10;
             text-align: center;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 60px 40px;
+            border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            max-width: 650px;
+            width: 100%;
+            animation: fadeIn 1s ease-out;
         }
 
-        .services h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            color: var(--pastel-pink);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-card h1 {
+            font-size: 4.5rem;
+            color: #ffffff;
+            text-shadow: 3px 3px 0px rgba(181, 150, 190, 0.5), 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero-card p {
+            font-size: 1.4rem;
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: var(--pastel-yellow);
+            color: #5a4b41;
+            text-decoration: none;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transition: all 0.3s ease;
+            border: 2px solid #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+            background-color: #fff8d6;
+        }
+
+        /* --- SERVICIOS --- */
+        .services {
+            padding: 90px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: #ff8b82;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 6px;
+            background: var(--pastel-yellow);
+            border-radius: 10px;
+            margin: 8px auto 0;
         }
 
         .service-cards {
@@ -158,176 +236,366 @@
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto;
         }
 
         .card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            width: 300px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--pastel-blue);
-            transition: transform 0.3s;
+            background: #ffffff;
+            padding: 40px 25px;
+            border-radius: 30px;
+            width: 320px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        /* --- GALERÍA --- */
+        .card-pink { border-top: 8px solid var(--pastel-pink); }
+        .card-lilac { border-top: 8px solid var(--pastel-lilac); }
+        .card-yellow { border-top: 8px solid var(--pastel-yellow); }
+
+        .icon-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .card-pink .icon-box { background-color: #ffe3e0; color: #ff6b6b; }
+        .card-lilac .icon-box { background-color: #e5e9f8; color: #6c5ce7; }
+        .card-yellow .icon-box { background-color: #fffde0; color: #f1c40f; }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #4a4a4a;
+        }
+
+        .card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #6e6e6e;
+        }
+
+        /* --- GALERIA DE TRABAJOS --- */
         .gallery-section {
             background-color: var(--pastel-blue);
-            padding: 80px 20px;
+            padding: 90px 20px;
             text-align: center;
-            border-top-left-radius: 50px;
-            border-top-right-radius: 50px;
+            border-top-left-radius: 60px;
+            border-top-right-radius: 60px;
         }
 
-        .gallery-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        .gallery-section .section-title {
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
         }
 
-        .gallery-section p {
-            margin-bottom: 40px;
-            color: white;
-            font-size: 1.1rem;
+        .gallery-section .section-title::after {
+            background: #ffffff;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 40px auto 0;
         }
 
         .gallery-item {
-            background-color: white;
+            background: #ffffff;
+            border-radius: 25px;
             padding: 15px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         .gallery-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.04) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
 
-        .gallery-item img {
+        .img-container {
             width: 100%;
-            border-radius: 12px;
-            object-fit: cover;
-            aspect-ratio: 1 / 1; 
+            height: 240px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* --- FOOTER (Acá pedimos el presupuesto) --- */
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item p {
+            margin-top: 15px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+            color: #555;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- FOOTER / CONTACTO --- */
         footer {
-            background-color: var(--pastel-lilac);
-            padding: 50px 20px;
+            background: linear-gradient(135deg, var(--pastel-lilac) 0%, #b8c0e6 100%);
+            padding: 80px 20px 40px;
             text-align: center;
-            color: white;
+            color: #ffffff;
+            position: relative;
         }
 
         footer h2 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            text-transform: uppercase;
         }
 
-        .footer-btn {
+        .footer-cta-btn {
             display: inline-block;
-            margin: 20px 0;
-            padding: 12px 30px;
-            background-color: white;
-            color: var(--pastel-lilac);
+            margin: 25px 0 35px;
+            padding: 15px 45px;
+            background-color: #ffffff;
+            color: #7b83be;
             text-decoration: none;
-            font-weight: bold;
-            border-radius: 20px;
-            transition: transform 0.3s;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
-        .footer-btn:hover {
-            transform: scale(1.05);
+        .footer-cta-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            background-color: var(--pastel-yellow);
+            color: #5a4b41;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 3rem; }
+            .hero-card { padding: 40px 20px; }
+            .nav-links { display: none; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Encabezado Principal (Llamativo y con Partículas) -->
-    <header>
-        <!-- Las burbujas flotantes de fondo -->
-        <ul class="particles">
-            <li></li><li></li><li></li><li></li><li></li>
-            <li></li><li></li><li></li><li></li><li></li>
+    <!-- NAV BAR -->
+    <nav>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-cube"></i> RUMEKO
+        </a>
+        <ul class="nav-links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#contacto">Contacto</a></li>
         </ul>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </nav>
 
-        <!-- Contenido principal -->
-        <div class="hero-content">
-            <h1>Rumeko</h1>
-            <p>Damos vida a tu imaginación.</p>
-            <div class="cta-container">
-                <a href="#galeria" class="cta-button">Explorar Creaciones</a>
-            </div>
+    <!-- HERO SECTION WITH PARTICLES -->
+    <header>
+        <canvas id="particles-canvas"></canvas>
+        <div class="hero-card">
+            <h1>RUMEKO</h1>
+            <p>DAMOS VIDA A TU IMAGINACIÓN</p>
+            <a href="#galeria" class="cta-btn">EXPLORAR CREACIONES</a>
         </div>
     </header>
 
-    <!-- Qué hacemos -->
-    <section class="services">
-        <h2>Lo que nos apasiona</h2>
+    <!-- SERVICIOS -->
+    <section id="servicios" class="services">
+        <h2 class="section-title">LO QUE NOS APASIONA</h2>
         <div class="service-cards">
-            <div class="card" style="border-color: var(--pastel-pink);">
-                <h3>Diseño 3D</h3>
-                <p>Modelamos tus ideas desde cero. Vos lo imaginas, nosotros le damos forma.</p>
+            <div class="card card-pink">
+                <div class="icon-box">
+                    <i class="fa-solid fa-pen-ruler"></i>
+                </div>
+                <h3>DISEÑO 3D</h3>
+                <p>Modelamos tus ideas desde cero. Vos lo imaginás, nosotros le damos forma con máxima dedicación.</p>
             </div>
-            <div class="card" style="border-color: var(--pastel-lilac);">
-                <h3>Impresión 3D</h3>
-                <p>Materializamos tus proyectos con máxima precisión y acabados increíbles.</p>
+            <div class="card card-lilac">
+                <div class="icon-box">
+                    <i class="fa-solid fa-print"></i>
+                </div>
+                <h3>IMPRESIÓN 3D</h3>
+                <p>Materializamos tus proyectos con máxima precisión, materiales ecológicos y acabados increíbles.</p>
             </div>
-            <div class="card" style="border-color: var(--pastel-yellow);">
-                <h3>Regalos y Deco</h3>
-                <p>Figuras únicas, macetas, mates y artículos 100% personalizados.</p>
+            <div class="card card-yellow">
+                <div class="icon-box">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <h3>REGALOS Y DECO</h3>
+                <p>Figuras únicas, macetas, mates, soportes y artículos 100% personalizados para sorprender.</p>
             </div>
         </div>
     </section>
 
-    <!-- Galería -->
+    <!-- GALERIA -->
     <section id="galeria" class="gallery-section">
-        <h2>Nuestros Trabajos</h2>
-        <p>Un vistazo a lo que sale de nuestras impresoras</p>
+        <h2 class="section-title">NUESTROS TRABAJOS</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/400/ffb7b2/ffffff?text=Tu+Foto+Aqui+1" alt="Trabajo 3D Rumeko">
-                <p style="margin-top: 15px; font-weight: bold;">Maceta Groot</p>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=600&q=80" alt="Maceta Groot 3D">
+                </div>
+                <p>MACETA GROOT</p>
             </div>
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/400/b5ead7/5d5c61?text=Tu+Foto+Aqui+2" alt="Trabajo 3D Rumeko">
-                <p style="margin-top: 15px; font-weight: bold;">Figura Personalizada</p>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Figura Personalizada">
+                </div>
+                <p>FIGURA PERSONALIZADA</p>
             </div>
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/400/c7ceea/ffffff?text=Tu+Foto+Aqui+3" alt="Trabajo 3D Rumeko">
-                <p style="margin-top: 15px; font-weight: bold;">Soporte Joystick</p>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Soporte Joystick">
+                </div>
+                <p>SOPORTE JOYSTICK</p>
             </div>
             <div class="gallery-item">
-                <img src="https://via.placeholder.com/400/fff5ba/5d5c61?text=Tu+Foto+Aqui+4" alt="Trabajo 3D Rumeko">
-                <p style="margin-top: 15px; font-weight: bold;">Llaveros Logo</p>
+                <div class="img-container">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Llaveros Logo">
+                </div>
+                <p>LLAVEROS LOGO</p>
             </div>
         </div>
     </section>
 
-    <!-- Contacto / Pie de página -->
+    <!-- FOOTER / CONTACTO -->
     <footer id="contacto">
-        <h2>¿Tenés una idea en mente?</h2>
-        <p>Hagámosla realidad.</p>
-        <a href="mailto:hola@rumeko.com" class="footer-btn">Pedir Presupuesto</a>
-        <br><br>
-        <p>Instagram: <strong>@Rumeko3D</strong></p>
-        <br>
-        <p style="font-size: 0.8rem; opacity: 0.8;">© 2026 Rumeko - Impresiones y Diseño 3D</p>
+        <h2>¿TENÉS UNA IDEA EN MENTE?</h2>
+        <a href="https://wa.me/123456789" target="_blank" class="footer-cta-btn">PEDIR PRESUPUESTO</a>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fa-brands fa-instagram"></i> @Rumeko3D
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i> hola@rumeko.com
+            </div>
+        </div>
+
+        <div class="copyright">
+            © 2026 Rumeko - Impresiones y Diseño 3D. Todos los derechos reservados.
+        </div>
     </footer>
 
+    <!-- SCRIPT DE PARTICULAS INTERACTIVAS EN CANVAS -->
+    <script>
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particlesArray = [];
+        const colors = ['rgba(255, 255, 255, 0.7)', 'rgba(255, 245, 186, 0.6)', 'rgba(255, 183, 178, 0.6)', 'rgba(199, 206, 234, 0.6)'];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 8 + 3;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * -1.2 - 0.3;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.y < -10) {
+                    this.y = canvas.height + 10;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particlesArray.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
