@@ -45,6 +45,17 @@
             font-family: 'Fredoka', sans-serif;
         }
 
+        /* --- CANVAS DE PARTÍCULAS REUTILIZABLE --- */
+        .particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
         /* --- NAVBAR --- */
         nav {
             position: fixed;
@@ -140,16 +151,6 @@
             overflow: hidden;
         }
 
-        #particles-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
         .hero-content {
             position: relative;
             z-index: 10;
@@ -221,10 +222,18 @@
 
         /* --- SERVICIOS --- */
         .services {
+            position: relative;
+            overflow: hidden;
             padding: 90px 20px;
+            text-align: center;
+            background-color: #f7fbfd;
+        }
+
+        .services .container {
+            position: relative;
+            z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
         }
 
         .section-title {
@@ -288,6 +297,8 @@
 
         /* --- GALERÍA --- */
         .gallery-section {
+            position: relative;
+            overflow: hidden;
             background-color: #f0ebff;
             padding: 90px 20px;
             border-top: 3px solid var(--dark-outline);
@@ -295,12 +306,18 @@
             text-align: center;
         }
 
+        .gallery-section .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
-            max-width: 1100px;
-            margin: 40px auto 0;
+            margin-top: 40px;
         }
 
         .gallery-item {
@@ -334,9 +351,18 @@
 
         /* --- FOOTER --- */
         footer {
+            position: relative;
+            overflow: hidden;
             background-color: var(--pastel-yellow);
             padding: 70px 20px 30px;
             text-align: center;
+        }
+
+        footer .container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         footer h2 {
@@ -448,9 +474,10 @@
         </ul>
     </nav>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <header>
-        <canvas id="particles-canvas"></canvas>
+        <!-- Canvas Hero: Mezcla multicolor -->
+        <canvas class="particles-canvas" data-colors="#f783ac,#b197fc,#74c0fc,#63e6be,#ffd43b,#ffa94d"></canvas>
         <div class="hero-content">
             <div class="mascot-avatar">
                 <img src="logoj.jpg" alt="Rumeko Mapache">
@@ -461,111 +488,115 @@
         </div>
     </header>
 
-    <!-- SERVICIOS -->
+    <!-- SERVICIOS SECTION -->
     <section id="servicios" class="services">
-        <h2 class="section-title brand-font">¿QUÉ HACEMOS?</h2>
-        <div class="service-cards">
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-pen-ruler"></i></div>
-                <h3 class="brand-font">Diseño 3D</h3>
-                <p>Modelamos tus ideas desde cero. Le damos forma a tus proyectos con la mejor precisión.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-cube"></i></div>
-                <h3 class="brand-font">Impresión 3D</h3>
-                <p>Materializamos tus archivos con acabado impecable y materiales ecológicos de alta calidad.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-face-smile"></i></div>
-                <h3 class="brand-font">Regalos & Deco</h3>
-                <p>Figuras, macetas, accesorios y artículos totalmente personalizados a tu gusto.</p>
+        <!-- Canvas Servicios: Tonos celestes, verdes y azules -->
+        <canvas class="particles-canvas" data-colors="#74c0fc,#63e6be,#3bc9db,#a5d8ff"></canvas>
+        <div class="container">
+            <h2 class="section-title brand-font">¿QUÉ HACEMOS?</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                    <h3 class="brand-font">Diseño 3D</h3>
+                    <p>Modelamos tus ideas desde cero. Le damos forma a tus proyectos con la mejor precisión.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-cube"></i></div>
+                    <h3 class="brand-font">Impresión 3D</h3>
+                    <p>Materializamos tus archivos con acabado impecable y materiales ecológicos de alta calidad.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-face-smile"></i></div>
+                    <h3 class="brand-font">Regalos & Deco</h3>
+                    <p>Figuras, macetas, accesorios y artículos totalmente personalizados a tu gusto.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- GALERÍA -->
+    <!-- GALERÍA SECTION -->
     <section id="galeria" class="gallery-section">
-        <h2 class="section-title brand-font">NUESTROS TRABAJOS</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img class="gallery-img" src="https://files.cults3d.com/uploaders/26879544/illustration-file/e88b02bd-a4fb-487b-ae90-ef83bef8cba0/Imagen-de-WhatsApp-2023-05-29-a-las-17.24.25.jpg" alt="FunkoPoP">
-                <p>FunkoPOPS</p>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-img" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Figura 3D">
-                <p>FIGURAS FAN ART</p>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-img" src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Soporte Joystick">
-                <p>SOPORTES TECH</p>
-            </div>
-            <div class="gallery-item">
-                <img class="gallery-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Llaveros">
-                <p>LLAVEROS Y ACCESORIOS</p>
+        <!-- Canvas Galería: Tonos violetas, púrpuras y rosas pastel -->
+        <canvas class="particles-canvas" data-colors="#b197fc,#f783ac,#eebefa,#fcc2d7"></canvas>
+        <div class="container">
+            <h2 class="section-title brand-font">NUESTROS TRABAJOS</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://files.cults3d.com/uploaders/26879544/illustration-file/e88b02bd-a4fb-487b-ae90-ef83bef8cba0/Imagen-de-WhatsApp-2023-05-29-a-las-17.24.25.jpg" alt="FunkoPoP">
+                    <p>FunkoPOPS</p>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Figura 3D">
+                    <p>FIGURAS FAN ART</p>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Soporte Joystick">
+                    <p>SOPORTES TECH</p>
+                </div>
+                <div class="gallery-item">
+                    <img class="gallery-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Llaveros">
+                    <p>LLAVEROS Y ACCESORIOS</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER / CONTACTO -->
+    <!-- FOOTER / CONTACTO SECTION -->
     <footer id="contacto">
-        <h2 class="brand-font">¿TENÉS UNA IDEA EN MENTE?</h2>
-        <p style="font-weight: 700;">¡Escribinos por WhatsApp y coordinemos tu presupuesto!</p>
+        <!-- Canvas Contacto: Tonos amarillos, naranjas y verde claro -->
+        <canvas class="particles-canvas" data-colors="#ffd43b,#ffa94d,#63e6be,#ffec99"></canvas>
+        <div class="container">
+            <h2 class="brand-font">¿TENÉS UNA IDEA EN MENTE?</h2>
+            <p style="font-weight: 700;">¡Escribinos por WhatsApp y coordinemos tu presupuesto!</p>
 
-        <!-- DOS OPCIONES DE WHATSAPP -->
-        <div class="whatsapp-options">
-            <a href="https://wa.me/5492474496130" target="_blank" class="btn-whatsapp">
-                <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem; color: #25D366;"></i> Hablá con Danilo
-            </a>
-            <a href="https://wa.me/5492474406497" target="_blank" class="btn-whatsapp">
-                <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem; color: #25D366;"></i> Hablá con Camila
-            </a>
-        </div>
+            <!-- DOS OPCIONES DE WHATSAPP -->
+            <div class="whatsapp-options">
+                <a href="https://wa.me/5492474496130" target="_blank" class="btn-whatsapp">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem; color: #25D366;"></i> Hablá con Danilo
+                </a>
+                <a href="https://wa.me/5492474406497" target="_blank" class="btn-whatsapp">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem; color: #25D366;"></i> Hablá con Camila
+                </a>
+            </div>
 
-        <!-- REDES SOCIALES -->
-        <div class="social-bar">
-            <a href="https://www.instagram.com/rumekolab" target="_blank" class="social-badge">
-                <i class="fa-brands fa-instagram" style="font-size: 1.4rem; color: #E1306C;"></i> @rumekolab
-            </a>
-        </div>
+            <!-- REDES SOCIALES -->
+            <div class="social-bar">
+                <a href="https://www.instagram.com/rumekolab" target="_blank" class="social-badge">
+                    <i class="fa-brands fa-instagram" style="font-size: 1.4rem; color: #E1306C;"></i> @rumekolab
+                </a>
+            </div>
 
-        <div class="copyright">
-            © 2026 Rumeko - Impresiones y Diseño 3D.
+            <div class="copyright">
+                © 2026 Rumeko - Impresiones y Diseño 3D.
+            </div>
         </div>
     </footer>
 
-    <!-- PARTICULAS CON COLORES DEL LOGO -->
+    <!-- SCRIPT DE PARTÍCULAS MULTI-SECCIÓN -->
     <script>
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-
-        function resize() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        const logoColors = ['#f783ac', '#b197fc', '#74c0fc', '#63e6be', '#ffd43b', '#ffa94d'];
-        const particles = [];
-
         class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 9 + 4;
-                this.speedY = Math.random() * -1 - 0.2;
-                this.speedX = (Math.random() - 0.5) * 0.8;
-                this.color = logoColors[Math.floor(Math.random() * logoColors.length)];
+            constructor(canvasWidth, canvasHeight, colors) {
+                this.canvasWidth = canvasWidth;
+                this.canvasHeight = canvasHeight;
+                this.x = Math.random() * canvasWidth;
+                this.y = Math.random() * canvasHeight;
+                this.size = Math.random() * 8 + 4;
+                this.speedY = Math.random() * -0.9 - 0.2;
+                this.speedX = (Math.random() - 0.5) * 0.7;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
             }
+
             update() {
                 this.y += this.speedY;
                 this.x += this.speedX;
+
                 if (this.y < -20) {
-                    this.y = canvas.height + 20;
-                    this.x = Math.random() * canvas.width;
+                    this.y = this.canvasHeight + 20;
+                    this.x = Math.random() * this.canvasWidth;
                 }
             }
-            draw() {
+
+            draw(ctx) {
                 ctx.fillStyle = this.color;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -576,19 +607,65 @@
             }
         }
 
-        for (let i = 0; i < 35; i++) {
-            particles.push(new Particle());
+        class SectionParticleSystem {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.colors = canvas.getAttribute('data-colors').split(',');
+                this.particles = [];
+                
+                this.resize();
+                this.init();
+            }
+
+            resize() {
+                const parent = this.canvas.parentElement;
+                this.canvas.width = parent.offsetWidth;
+                this.canvas.height = parent.offsetHeight;
+            }
+
+            init() {
+                this.particles = [];
+                // Densidad adaptativa según superficie
+                const area = this.canvas.width * this.canvas.height;
+                const particleCount = Math.min(Math.floor(area / 22000), 40);
+
+                for (let i = 0; i < particleCount; i++) {
+                    this.particles.push(new Particle(this.canvas.width, this.canvas.height, this.colors));
+                }
+            }
+
+            updateAndDraw() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.particles.forEach(p => {
+                    p.update();
+                    p.draw(this.ctx);
+                });
+            }
         }
 
+        // Inicializar sistemas de partículas para todas las secciones
+        const particleCanvases = document.querySelectorAll('.particles-canvas');
+        const systems = [];
+
+        particleCanvases.forEach(canvas => {
+            systems.push(new SectionParticleSystem(canvas));
+        });
+
+        // Bucle global de animación
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            systems.forEach(system => system.updateAndDraw());
             requestAnimationFrame(animate);
         }
         animate();
+
+        // Manejo del evento Resize para ajustar tamaños
+        window.addEventListener('resize', () => {
+            systems.forEach(system => {
+                system.resize();
+                system.init();
+            });
+        });
     </script>
 </body>
 </html>
