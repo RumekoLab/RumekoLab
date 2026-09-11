@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rumeko | Diseño e Impresión 3D</title>
-    <!-- Fonts Google -->
+    <title>Rumeko | Estudio de Diseño & Impresión 3D</title>
+    <!-- Fonts: Outfit (Titulares) & Plus Jakarta Sans (Cuerpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --pastel-pink: #f783ac;
-            --pastel-purple: #b197fc;
-            --pastel-blue: #74c0fc;
-            --pastel-green: #63e6be;
-            --pastel-yellow: #ffd43b;
-            --pastel-orange: #ffa94d;
-            --dark-outline: #2b2b2b;
-            --bg-light: #fefcfb;
-            --white: #ffffff;
+            --bg-dark: #0a0c14;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --border-glow: rgba(255, 255, 255, 0.25);
+            
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            
+            --accent-pink: #ff75c3;
+            --accent-purple: #9a75ff;
+            --accent-blue: #5271ff;
+            --accent-cyan: #00e5ff;
+            --accent-yellow: #ffbd59;
+            
+            --gradient-primary: linear-gradient(135deg, #ff75c3 0%, #9a75ff 50%, #5271ff 100%);
+            --gradient-glow: linear-gradient(135deg, rgba(255,117,195,0.4), rgba(154,117,255,0.4));
         }
 
         * {
@@ -35,17 +43,18 @@
         }
 
         body {
-            font-family: 'Quicksand', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--dark-outline);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         h1, h2, h3, .brand-font {
-            font-family: 'Fredoka', sans-serif;
+            font-family: 'Outfit', sans-serif;
         }
 
-        /* --- CANVAS DE PARTÍCULAS REUTILIZABLE --- */
+        /* --- CANVAS DE PARTÍCULAS --- */
         .particles-canvas {
             position: absolute;
             top: 0;
@@ -63,91 +72,82 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            padding: 12px 6%;
+            background: rgba(10, 12, 20, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 16px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid var(--dark-outline);
+            border-bottom: 1px solid var(--border-glass);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
-            color: var(--dark-outline);
+            color: var(--text-main);
         }
 
         .logo-badge {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            border: 2px solid var(--dark-outline);
-            overflow: hidden;
-            background: var(--white);
+            padding: 2px;
+            background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 0 15px rgba(154, 117, 255, 0.4);
         }
 
         .logo-badge img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 50%;
+            background: #000;
         }
 
         .logo-text {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .dots-deco {
-            display: inline-flex;
-            gap: 4px;
-            margin-left: 6px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 30px;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--dark-outline);
-            font-weight: 700;
-            font-size: 1.05rem;
-            padding: 8px 18px;
-            border-radius: 20px;
-            transition: all 0.25s ease;
-            border: 2px solid transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover {
-            border-color: var(--dark-outline);
-            background-color: var(--pastel-yellow);
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         /* --- HERO SECTION --- */
         header {
             position: relative;
-            min-height: 92vh;
-            padding: 130px 20px 60px;
+            min-height: 100vh;
+            padding: 140px 20px 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at center, #ffffff 0%, #f4efff 100%);
-            border-bottom: 3px solid var(--dark-outline);
+            background: radial-gradient(circle at 50% 30%, rgba(154, 117, 255, 0.15) 0%, rgba(10, 12, 20, 1) 70%);
             overflow: hidden;
         }
 
@@ -155,297 +155,342 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            max-width: 700px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            padding: 50px 30px;
-            border-radius: 40px;
-            border: 3px solid var(--dark-outline);
-            box-shadow: 8px 8px 0px var(--dark-outline);
+            max-width: 780px;
+            background: var(--bg-card);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            padding: 60px 40px;
+            border-radius: 32px;
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .mascot-wrapper {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 25px;
         }
 
         .mascot-avatar {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 20px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            border: 4px solid var(--dark-outline);
-            background: var(--white);
-            padding: 5px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            position: relative;
+            padding: 3px;
+            background: var(--gradient-primary);
+            box-shadow: 0 0 30px rgba(255, 117, 195, 0.3);
+            animation: pulseGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(255, 117, 195, 0.3); }
+            100% { box-shadow: 0 0 45px rgba(0, 229, 255, 0.5); }
         }
 
         .mascot-avatar img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 50%;
         }
 
         .hero-title {
-            font-size: 3.5rem;
-            letter-spacing: 3px;
-            color: var(--dark-outline);
-            margin-bottom: 10px;
-            text-transform: uppercase;
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #555;
-            margin-bottom: 30px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            letter-spacing: 0.5px;
         }
 
         .btn-main {
             display: inline-block;
-            padding: 16px 36px;
-            font-family: 'Fredoka', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
+            padding: 16px 40px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-decoration: none;
-            color: var(--dark-outline);
-            background-color: var(--pastel-green);
-            border: 3px solid var(--dark-outline);
+            color: #ffffff;
+            background: var(--gradient-primary);
             border-radius: 50px;
-            box-shadow: 4px 4px 0px var(--dark-outline);
-            transition: all 0.2s ease;
+            box-shadow: 0 10px 25px rgba(154, 117, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
             cursor: pointer;
         }
 
         .btn-main:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--dark-outline);
-            background-color: #8ce99a;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 229, 255, 0.5);
         }
 
-        /* --- SERVICIOS --- */
-        .services {
+        /* --- SECCIONES REUTILIZABLES --- */
+        section {
             position: relative;
+            padding: 100px 20px;
             overflow: hidden;
-            padding: 90px 20px;
-            text-align: center;
-            background-color: #f7fbfd;
         }
 
-        .services .container {
+        .container {
             position: relative;
             z-index: 2;
-            max-width: 1200px;
+            max-width: 1140px;
             margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
         }
 
         .section-title {
             font-size: 2.8rem;
-            margin-bottom: 50px;
-            color: var(--dark-outline);
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: inline-block;
-            position: relative;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+
+        /* --- SERVICIOS --- */
+        .services {
+            background: radial-gradient(circle at 20% 50%, rgba(82, 113, 255, 0.08) 0%, transparent 50%);
+            border-top: 1px solid var(--border-glass);
         }
 
         .service-cards {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            flex-wrap: wrap;
         }
 
         .card {
-            background: var(--white);
-            border: 3px solid var(--dark-outline);
-            border-radius: 30px;
-            padding: 35px 25px;
-            width: 320px;
-            box-shadow: 6px 6px 0px var(--dark-outline);
-            transition: all 0.25s ease;
-            text-align: center;
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 40px 30px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
         }
 
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 10px 10px 0px var(--dark-outline);
+            background: var(--bg-card-hover);
+            border-color: var(--border-glow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(116, 192, 252, 0.15);
         }
 
         .card-icon {
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            border: 3px solid var(--dark-outline);
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            transition: all 0.3s ease;
         }
 
-        .card:nth-child(1) .card-icon { background-color: var(--pastel-pink); }
-        .card:nth-child(2) .card-icon { background-color: var(--pastel-purple); }
-        .card:nth-child(3) .card-icon { background-color: var(--pastel-blue); }
+        .card:nth-child(1) .card-icon { color: var(--accent-pink); border-color: rgba(255,117,195,0.3); }
+        .card:nth-child(2) .card-icon { color: var(--accent-purple); border-color: rgba(154,117,255,0.3); }
+        .card:nth-child(3) .card-icon { color: var(--accent-cyan); border-color: rgba(0,229,255,0.3); }
 
         .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
         }
 
         .card p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #555;
-            font-weight: 600;
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            line-height: 1.7;
         }
 
         /* --- GALERÍA --- */
         .gallery-section {
-            position: relative;
-            overflow: hidden;
-            background-color: #f0ebff;
-            padding: 90px 20px;
-            border-top: 3px solid var(--dark-outline);
-            border-bottom: 3px solid var(--dark-outline);
-            text-align: center;
-        }
-
-        .gallery-section .container {
-            position: relative;
-            z-index: 2;
-            max-width: 1100px;
-            margin: 0 auto;
+            background: radial-gradient(circle at 80% 50%, rgba(154, 117, 255, 0.08) 0%, transparent 50%);
+            border-top: 1px solid var(--border-glass);
         }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 25px;
-            margin-top: 40px;
         }
 
         .gallery-item {
-            background: var(--white);
-            border: 3px solid var(--dark-outline);
-            border-radius: 24px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
             padding: 12px;
-            box-shadow: 5px 5px 0px var(--dark-outline);
-            transition: all 0.25s ease;
+            transition: all 0.4s ease;
+            overflow: hidden;
         }
 
         .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 8px 8px 0px var(--dark-outline);
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(255, 117, 195, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 117, 195, 0.2);
+        }
+
+        .gallery-img-wrapper {
+            width: 100%;
+            height: 240px;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
         }
 
         .gallery-img {
             width: 100%;
-            height: 230px;
-            border-radius: 16px;
+            height: 100%;
             object-fit: cover;
-            border: 2px solid var(--dark-outline);
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.08);
         }
 
         .gallery-item p {
-            margin-top: 12px;
-            font-family: 'Fredoka', sans-serif;
-            font-size: 1.2rem;
-            color: var(--dark-outline);
+            margin-top: 14px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
         }
 
-        /* --- FOOTER --- */
+        /* --- FOOTER / CONTACTO --- */
         footer {
             position: relative;
             overflow: hidden;
-            background-color: var(--pastel-yellow);
-            padding: 70px 20px 30px;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 189, 89, 0.08) 0%, rgba(10, 12, 20, 1) 80%);
+            border-top: 1px solid var(--border-glass);
+            padding: 90px 20px 40px;
             text-align: center;
         }
 
-        footer .container {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
+        footer h2 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff 0%, #ffd43b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        footer h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+        footer p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
         }
 
         .whatsapp-options {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
-            margin: 25px 0 35px;
+            margin: 35px 0 45px;
         }
 
         .btn-whatsapp {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background-color: var(--white);
-            color: var(--dark-outline);
-            border: 3px solid var(--dark-outline);
+            gap: 12px;
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
             border-radius: 50px;
-            font-family: 'Fredoka', sans-serif;
-            font-size: 1.1rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
             text-decoration: none;
-            box-shadow: 4px 4px 0px var(--dark-outline);
-            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         .btn-whatsapp:hover {
-            background-color: var(--pastel-green);
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--dark-outline);
+            background: rgba(37, 211, 102, 0.15);
+            border-color: rgba(37, 211, 102, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.25);
         }
 
         .social-bar {
             display: flex;
             justify-content: center;
             gap: 20px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
         .social-badge {
-            background: var(--white);
-            padding: 12px 24px;
-            border-radius: 20px;
-            border: 2px solid var(--dark-outline);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            padding: 12px 28px;
+            border-radius: 50px;
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            color: var(--dark-outline);
-            font-family: 'Fredoka', sans-serif;
-            box-shadow: 3px 3px 0px var(--dark-outline);
-            transition: all 0.2s ease;
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .social-badge:hover {
-            background-color: var(--pastel-pink);
-            color: var(--white);
-            transform: translate(-2px, -2px);
-            box-shadow: 5px 5px 0px var(--dark-outline);
+            background: rgba(225, 48, 108, 0.15);
+            border-color: rgba(225, 48, 108, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(225, 48, 108, 0.25);
         }
 
         .copyright {
             font-size: 0.9rem;
-            font-weight: 600;
-            opacity: 0.8;
-            border-top: 2px dashed var(--dark-outline);
-            padding-top: 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-glass);
+            padding-top: 30px;
             max-width: 600px;
             margin: 0 auto;
         }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
+            .hero-title { font-size: 2.6rem; }
             .nav-links { display: none; }
             .whatsapp-options { flex-direction: column; align-items: center; }
+            .hero-content { padding: 40px 20px; }
         }
     </style>
 </head>
@@ -458,13 +503,6 @@
                 <img src="logoj.jpg" alt="Rumeko Logo">
             </div>
             <span class="logo-text brand-font">RUMEKO</span>
-            <div class="dots-deco">
-                <span class="dot" style="background: var(--pastel-pink);"></span>
-                <span class="dot" style="background: var(--pastel-purple);"></span>
-                <span class="dot" style="background: var(--pastel-blue);"></span>
-                <span class="dot" style="background: var(--pastel-green);"></span>
-                <span class="dot" style="background: var(--pastel-yellow);"></span>
-            </div>
         </a>
         <ul class="nav-links">
             <li><a href="#">Inicio</a></li>
@@ -476,37 +514,42 @@
 
     <!-- HERO SECTION -->
     <header>
-        <canvas class="particles-canvas" data-colors="#f783ac,#b197fc,#74c0fc,#63e6be,#ffd43b,#ffa94d"></canvas>
+        <canvas class="particles-canvas" data-colors="#ff75c3,#9a75ff,#5271ff,#00e5ff,#ffbd59"></canvas>
         <div class="hero-content">
-            <div class="mascot-avatar">
-                <img src="logoj.jpg" alt="Rumeko Mapache">
+            <div class="mascot-wrapper">
+                <div class="mascot-avatar">
+                    <img src="logoj.jpg" alt="Rumeko Avatar">
+                </div>
             </div>
             <h1 class="hero-title brand-font">RUMEKO</h1>
-            <p class="hero-subtitle">Diseño e Impresión 3D con estilo único</p>
-            <a href="#galeria" class="btn-main">EXPLORAR CREACIONES</a>
+            <p class="hero-subtitle">Estudio de Diseño & Impresión 3D de alta precisión</p>
+            <a href="#galeria" class="btn-main">EXPLORAR PORTAFOLIO</a>
         </div>
     </header>
 
     <!-- SERVICIOS SECTION -->
     <section id="servicios" class="services">
-        <canvas class="particles-canvas" data-colors="#74c0fc,#63e6be,#3bc9db,#a5d8ff"></canvas>
+        <canvas class="particles-canvas" data-colors="#5271ff,#00e5ff,#74c0fc,#a5d8ff"></canvas>
         <div class="container">
-            <h2 class="section-title brand-font">¿QUÉ HACEMOS?</h2>
+            <div class="section-header">
+                <span class="section-tag">Especialidades</span>
+                <h2 class="section-title brand-font">¿QUÉ CREAMOS?</h2>
+            </div>
             <div class="service-cards">
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-pen-ruler"></i></div>
-                    <h3 class="brand-font">Diseño 3D</h3>
-                    <p>Modelamos tus ideas desde cero. Le damos forma a tus proyectos con la mejor precisión.</p>
+                    <h3 class="brand-font">Diseño 3D Avanzado</h3>
+                    <p>Modelado CAD e ingenieril personalizado. Llevamos tus ideas conceptuales a modelos digitales precisos.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon"><i class="fa-solid fa-cube"></i></div>
-                    <h3 class="brand-font">Impresión 3D</h3>
-                    <p>Materializamos tus archivos con acabado impecable y materiales ecológicos de alta calidad.</p>
+                    <h3 class="brand-font">Impresión Premium</h3>
+                    <p>Fabricación aditiva con acabados impecables, materiales ecológicos de grado técnico y alta durabilidad.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon"><i class="fa-solid fa-face-smile"></i></div>
-                    <h3 class="brand-font">Regalos & Deco</h3>
-                    <p>Figuras, macetas, accesorios y artículos totalmente personalizados a tu gusto.</p>
+                    <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3 class="brand-font">Piezas & Coleccionables</h3>
+                    <p>Prototipos, figuras de colección, accesorios tech y arte decorativo exclusivo hecho a medida.</p>
                 </div>
             </div>
         </div>
@@ -514,25 +557,36 @@
 
     <!-- GALERÍA SECTION -->
     <section id="galeria" class="gallery-section">
-        <canvas class="particles-canvas" data-colors="#b197fc,#f783ac,#eebefa,#fcc2d7"></canvas>
+        <canvas class="particles-canvas" data-colors="#9a75ff,#ff75c3,#eebefa,#fcc2d7"></canvas>
         <div class="container">
-            <h2 class="section-title brand-font">NUESTROS TRABAJOS</h2>
+            <div class="section-header">
+                <span class="section-tag">Showcase</span>
+                <h2 class="section-title brand-font">PROYECTOS DESTACADOS</h2>
+            </div>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img class="gallery-img" src="https://files.cults3d.com/uploaders/26879544/illustration-file/e88b02bd-a4fb-487b-ae90-ef83bef8cba0/Imagen-de-WhatsApp-2023-05-29-a-las-17.24.25.jpg" alt="FunkoPoP">
-                    <p>FunkoPOPS</p>
+                    <div class="gallery-img-wrapper">
+                        <img class="gallery-img" src="https://files.cults3d.com/uploaders/26879544/illustration-file/e88b02bd-a4fb-487b-ae90-ef83bef8cba0/Imagen-de-WhatsApp-2023-05-29-a-las-17.24.25.jpg" alt="FunkoPoP">
+                    </div>
+                    <p>FUNKO POPS CUSTOM</p>
                 </div>
                 <div class="gallery-item">
-                    <img class="gallery-img" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Figura 3D">
-                    <p>FIGURAS FAN ART</p>
+                    <div class="gallery-img-wrapper">
+                        <img class="gallery-img" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Figura 3D">
+                    </div>
+                    <p>FIGURAS ARTÍSTICAS</p>
                 </div>
                 <div class="gallery-item">
-                    <img class="gallery-img" src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Soporte Joystick">
+                    <div class="gallery-img-wrapper">
+                        <img class="gallery-img" src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Soporte Tech">
+                    </div>
                     <p>SOPORTES TECH</p>
                 </div>
                 <div class="gallery-item">
-                    <img class="gallery-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Llaveros">
-                    <p>LLAVEROS Y ACCESORIOS</p>
+                    <div class="gallery-img-wrapper">
+                        <img class="gallery-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Llaveros">
+                    </div>
+                    <p>ACCESORIOS & ACCESORIOS</p>
                 </div>
             </div>
         </div>
@@ -540,54 +594,52 @@
 
     <!-- FOOTER / CONTACTO SECTION -->
     <footer id="contacto">
-        <canvas class="particles-canvas" data-colors="#ffd43b,#ffa94d,#63e6be,#ffec99"></canvas>
+        <canvas class="particles-canvas" data-colors="#ffbd59,#00e5ff,#ff75c3,#ffec99"></canvas>
         <div class="container">
-            <h2 class="brand-font">¿TENÉS UNA IDEA EN MENTE?</h2>
-            <p style="font-weight: 700;">¡Escribinos por WhatsApp y coordinemos tu presupuesto!</p>
+            <h2 class="brand-font">¿LISTO PARA CREAR?</h2>
+            <p>Escribinos directamente y cotizá tu proyecto en minutos.</p>
 
-            <!-- DOS OPCIONES DE WHATSAPP -->
             <div class="whatsapp-options">
                 <a href="https://wa.me/5492474496130" target="_blank" class="btn-whatsapp">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem; color: #25D366;"></i> Hablá con Danilo
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i> Danilo
                 </a>
                 <a href="https://wa.me/5492474406497" target="_blank" class="btn-whatsapp">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem; color: #25D366;"></i> Hablá con Camila
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem; color: #25D366;"></i> Camila
                 </a>
             </div>
 
-            <!-- REDES SOCIALES -->
             <div class="social-bar">
                 <a href="https://www.instagram.com/rumekolab" target="_blank" class="social-badge">
-                    <i class="fa-brands fa-instagram" style="font-size: 1.4rem; color: #E1306C;"></i> @rumekolab
+                    <i class="fa-brands fa-instagram" style="font-size: 1.3rem; color: #E1306C;"></i> @rumekolab
                 </a>
             </div>
 
             <div class="copyright">
-                © 2026 Rumeko - Impresiones y Diseño 3D.
+                © 2026 Rumeko. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
-    <!-- SCRIPT DE PARTÍCULAS MULTI-FORMA -->
+    <!-- SCRIPT DE PARTÍCULAS ELEGANTE Y BRILLANTE -->
     <script>
-        class Particle {
+        class GlowingParticle {
             constructor(canvasWidth, canvasHeight, colors) {
                 this.canvasWidth = canvasWidth;
                 this.canvasHeight = canvasHeight;
                 this.x = Math.random() * canvasWidth;
                 this.y = Math.random() * canvasHeight;
-                this.size = Math.random() * 8 + 6;
-                this.speedY = Math.random() * -0.8 - 0.2;
-                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.size = Math.random() * 6 + 4;
+                this.speedY = Math.random() * -0.6 - 0.2;
+                this.speedX = (Math.random() - 0.5) * 0.4;
                 this.color = colors[Math.floor(Math.random() * colors.length)];
 
-                // Variedad de formas geométricas y pop
-                const shapes = ['circle', 'square', 'triangle', 'star', 'cross'];
+                // Formas geométricas elegantes
+                const shapes = ['ring', 'diamond', 'star', 'circle', 'hexagon'];
                 this.shape = shapes[Math.floor(Math.random() * shapes.length)];
 
-                // Rotación suave para que giren mientras flotan
                 this.angle = Math.random() * Math.PI * 2;
-                this.spin = (Math.random() - 0.5) * 0.03;
+                this.spin = (Math.random() - 0.5) * 0.02;
+                this.opacity = Math.random() * 0.5 + 0.4;
             }
 
             update() {
@@ -606,55 +658,55 @@
                 ctx.translate(this.x, this.y);
                 ctx.rotate(this.angle);
 
+                // Efecto de resplandor Neón Elegante
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = this.color;
                 ctx.fillStyle = this.color;
-                ctx.strokeStyle = '#2b2b2b';
-                ctx.lineWidth = 1.8;
+                ctx.strokeStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.lineWidth = 1.5;
 
                 ctx.beginPath();
                 const s = this.size;
 
                 switch (this.shape) {
                     case 'circle':
+                        ctx.arc(0, 0, s * 0.7, 0, Math.PI * 2);
+                        ctx.fill();
+                        break;
+
+                    case 'ring':
                         ctx.arc(0, 0, s, 0, Math.PI * 2);
+                        ctx.stroke();
                         break;
 
-                    case 'square':
-                        ctx.rect(-s, -s, s * 2, s * 2);
-                        break;
-
-                    case 'triangle':
+                    case 'diamond':
                         ctx.moveTo(0, -s * 1.3);
-                        ctx.lineTo(s * 1.1, s);
-                        ctx.lineTo(-s * 1.1, s);
+                        ctx.lineTo(s * 0.9, 0);
+                        ctx.lineTo(0, s * 1.3);
+                        ctx.lineTo(-s * 0.9, 0);
                         ctx.closePath();
+                        ctx.stroke();
                         break;
 
                     case 'star':
-                        for (let i = 0; i < 5; i++) {
-                            ctx.lineTo(
-                                Math.cos((18 + i * 72) * Math.PI / 180) * s * 1.3,
-                                -Math.sin((18 + i * 72) * Math.PI / 180) * s * 1.3
-                            );
-                            ctx.lineTo(
-                                Math.cos((54 + i * 72) * Math.PI / 180) * (s * 0.55),
-                                -Math.sin((54 + i * 72) * Math.PI / 180) * (s * 0.55)
-                            );
+                        for (let i = 0; i < 4; i++) {
+                            ctx.lineTo(Math.cos((i * 90) * Math.PI / 180) * s * 1.2, Math.sin((i * 90) * Math.PI / 180) * s * 1.2);
+                            ctx.lineTo(Math.cos((45 + i * 90) * Math.PI / 180) * (s * 0.4), Math.sin((45 + i * 90) * Math.PI / 180) * (s * 0.4));
                         }
                         ctx.closePath();
+                        ctx.fill();
                         break;
 
-                    case 'cross':
-                        const w = s * 0.35;
-                        ctx.moveTo(-w, -s); ctx.lineTo(w, -s); ctx.lineTo(w, -w);
-                        ctx.lineTo(s, -w); ctx.lineTo(s, w); ctx.lineTo(w, w);
-                        ctx.lineTo(w, s); ctx.lineTo(-w, s); ctx.lineTo(-w, w);
-                        ctx.lineTo(-s, w); ctx.lineTo(-s, -w); ctx.lineTo(-w, -w);
+                    case 'hexagon':
+                        for (let i = 0; i < 6; i++) {
+                            ctx.lineTo(Math.cos((i * 60) * Math.PI / 180) * s, Math.sin((i * 60) * Math.PI / 180) * s);
+                        }
                         ctx.closePath();
+                        ctx.stroke();
                         break;
                 }
 
-                ctx.fill();
-                ctx.stroke();
                 ctx.restore();
             }
         }
@@ -679,10 +731,10 @@
             init() {
                 this.particles = [];
                 const area = this.canvas.width * this.canvas.height;
-                const particleCount = Math.min(Math.floor(area / 24000), 35);
+                const particleCount = Math.min(Math.floor(area / 22000), 30);
 
                 for (let i = 0; i < particleCount; i++) {
-                    this.particles.push(new Particle(this.canvas.width, this.canvas.height, this.colors));
+                    this.particles.push(new GlowingParticle(this.canvas.width, this.canvas.height, this.colors));
                 }
             }
 
