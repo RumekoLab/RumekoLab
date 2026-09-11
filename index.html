@@ -10,18 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Three.js CDN para el Visor 3D Interactivo -->
+    <!-- Three.js CDN para el Visor 3D Interactivo del Logo -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         :root {
-            /* Paleta Oscura Premium */
+            /* Fondo Oscuro Premium */
             --bg-dark: #08090e;
             --bg-card: rgba(255, 255, 255, 0.03);
             --bg-card-hover: rgba(255, 255, 255, 0.07);
             --border-glass: rgba(255, 255, 255, 0.08);
             
-            /* Colores Pastel Neón (Inspirados en la marca) */
+            /* Colores Pastel Neón */
             --accent-pink: #f472b6;     /* Rosa Pastel */
             --accent-purple: #c084fc;   /* Violeta Pastel */
             --accent-cyan: #38bdf8;     /* Celeste Pastel */
@@ -32,7 +32,6 @@
             --text-muted: #94a3b8;
             
             --gradient-primary: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #38bdf8 100%);
-            --gradient-pastel-soft: linear-gradient(135deg, rgba(244,114,182,0.15), rgba(192,132,252,0.15));
         }
 
         * {
@@ -124,7 +123,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 24px;
+            gap: 28px;
         }
 
         .nav-links a {
@@ -151,11 +150,11 @@
             font-weight: 700;
         }
 
-        /* --- HERO SECTION CON VISOR 3D --- */
+        /* --- HERO SECTION --- */
         header {
             position: relative;
             min-height: 100vh;
-            padding: 110px 5% 50px;
+            padding: 120px 5% 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -249,7 +248,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 15px 30px;
+            padding: 15px 32px;
             font-family: 'Outfit', sans-serif;
             font-size: 0.95rem;
             font-weight: 700;
@@ -271,7 +270,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 15px 24px;
+            padding: 15px 26px;
             font-family: 'Outfit', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
@@ -323,7 +322,7 @@
             background: var(--border-glass);
         }
 
-        /* VISOR 3D CONTENEDOR */
+        /* --- VISOR 3D DEL LOGO --- */
         .hero-visual-col {
             position: relative;
             display: flex;
@@ -369,7 +368,6 @@
             font-size: 0.72rem;
             font-weight: 600;
             color: var(--accent-cyan);
-            letter-spacing: 0.5px;
             pointer-events: none;
             backdrop-filter: blur(8px);
             display: flex;
@@ -378,7 +376,6 @@
             white-space: nowrap;
         }
 
-        /* Floating Chips */
         .floating-chip {
             position: absolute;
             z-index: 3;
@@ -398,139 +395,12 @@
             white-space: nowrap;
         }
 
-        .chip-1 { top: -10px; left: -10px; animation: float 4s infinite ease-in-out; }
-        .chip-2 { bottom: 10px; right: -10px; animation: float 4.5s infinite ease-in-out 1s; }
+        .chip-1 { top: -10px; left: -5px; animation: float 4s infinite ease-in-out; }
+        .chip-2 { bottom: 10px; right: -5px; animation: float 4.5s infinite ease-in-out 1s; }
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
-        }
-
-        /* --- SECCIÓN CALCULADORA / COTIZADOR --- */
-        .calculator-section {
-            background: radial-gradient(circle at 30% 50%, rgba(244, 114, 182, 0.08) 0%, transparent 60%);
-            border-top: 1px solid var(--border-glass);
-            padding: 80px 5%;
-        }
-
-        .calculator-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glow);
-            border-radius: 24px;
-            backdrop-filter: blur(20px);
-            padding: clamp(20px, 4vw, 40px);
-            max-width: 900px;
-            margin: 0 auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .calc-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        @media (min-width: 768px) {
-            .calc-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .calc-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .calc-label {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .calc-options {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .option-btn {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 14px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.25s ease;
-        }
-
-        .option-btn:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            color: var(--text-main);
-        }
-
-        .option-btn.active {
-            background: rgba(192, 132, 252, 0.15);
-            border-color: var(--accent-purple);
-            color: #ffffff;
-            box-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
-        }
-
-        .calc-result-box {
-            grid-column: 1 / -1;
-            background: rgba(8, 9, 14, 0.6);
-            border: 1px solid var(--border-glass);
-            border-radius: 18px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .price-estimate {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 800;
-            color: var(--accent-yellow);
-            text-shadow: 0 0 15px rgba(253, 224, 71, 0.3);
-        }
-
-        .btn-whatsapp-quote {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: #25D366;
-            color: #000;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            font-size: 0.95rem;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 380px;
-        }
-
-        .btn-whatsapp-quote:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.5);
         }
 
         /* --- SERVICIOS & GALERÍA --- */
@@ -773,7 +643,6 @@
         </a>
         <ul class="nav-links">
             <li><a href="#">Inicio</a></li>
-            <li><a href="#cotizador">Cotizador</a></li>
             <li><a href="#servicios">Servicios</a></li>
             <li><a href="#galeria">Galería</a></li>
             <li><a href="#contacto">Contacto</a></li>
@@ -781,7 +650,7 @@
         <a href="#contacto" class="nav-btn-mobile brand-font">Contacto</a>
     </nav>
 
-    <!-- HERO SECTION CON VISOR 3D REAL -->
+    <!-- HERO SECTION -->
     <header>
         <canvas class="particles-canvas" data-colors="#f472b6,#c084fc,#38bdf8,#fde047"></canvas>
         <div class="hero-container">
@@ -797,11 +666,11 @@
                     Modelado CAD personalizado, figuras de colección, accesorios tech y soluciones técnicas con acabados de precisión en tonos pastel y neón.
                 </p>
                 <div class="hero-actions">
-                    <a href="#cotizador" class="btn-main">
-                        <i class="fa-solid fa-calculator"></i> COTIZAR AL INSTANTE
+                    <a href="#galeria" class="btn-main">
+                        EXPLORAR TRABAJOS <i class="fa-solid fa-arrow-right"></i>
                     </a>
                     <a href="#contacto" class="btn-secondary">
-                        <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> CONSULTA DIRECTA
+                        <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> COTIZAR POR WHATSAPP
                     </a>
                 </div>
 
@@ -823,12 +692,12 @@
                 </div>
             </div>
 
-            <!-- VISOR 3D INTERACTIVO -->
+            <!-- VISOR 3D INTERACTIVO DEL LOGO -->
             <div class="hero-visual-col">
                 <div class="viewer-3d-wrapper" id="viewer-container">
                     <canvas id="webgl-canvas"></canvas>
                     <div class="viewer-hint">
-                        <i class="fa-solid fa-hand-pointer"></i> Arrastrá para rotar en 3D
+                        <i class="fa-solid fa-hand-pointer"></i> Arrastrá para rotar tu logo en 3D
                     </div>
                 </div>
 
@@ -843,77 +712,12 @@
         </div>
     </header>
 
-    <!-- COTIZADOR / CALCULADORA INSTANTÁNEA -->
-    <section id="cotizador" class="calculator-section">
+    <!-- SERVICIOS -->
+    <section id="servicios" class="services">
         <canvas class="particles-canvas" data-colors="#c084fc,#f472b6,#38bdf8"></canvas>
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Presupuesto Express</span>
-                <h2 class="section-title brand-font">COTIZADOR INSTANTÁNEO</h2>
-            </div>
-
-            <div class="calculator-card">
-                <div class="calc-grid">
-                    
-                    <!-- Tipo de Proyecto -->
-                    <div class="calc-group">
-                        <label class="calc-label"><i class="fa-solid fa-layer-group" style="color: var(--accent-pink);"></i> Tipo de Pieza</label>
-                        <div class="calc-options" id="opt-type">
-                            <button class="option-btn active" data-value="fanart" data-price="4500">Figura / Funko</button>
-                            <button class="option-btn" data-value="tecnica" data-price="3500">Pieza Técnica</button>
-                            <button class="option-btn" data-value="accesorio" data-price="2000">Llavero / Accesorio</button>
-                        </div>
-                    </div>
-
-                    <!-- Tamaño -->
-                    <div class="calc-group">
-                        <label class="calc-label"><i class="fa-solid fa-ruler-combined" style="color: var(--accent-cyan);"></i> Tamaño Aprox.</label>
-                        <div class="calc-options" id="opt-size">
-                            <button class="option-btn active" data-mult="1">Chico (~5-8 cm)</button>
-                            <button class="option-btn" data-mult="1.8">Mediano (~12-15 cm)</button>
-                            <button class="option-btn" data-mult="3.2">Grande (~20+ cm)</button>
-                        </div>
-                    </div>
-
-                    <!-- Material / Acabado -->
-                    <div class="calc-group">
-                        <label class="calc-label"><i class="fa-solid fa-palette" style="color: var(--accent-purple);"></i> Material & Acabado</label>
-                        <div class="calc-options" id="opt-material">
-                            <button class="option-btn active" data-add="0">PLA Estándar Pastel</button>
-                            <button class="option-btn" data-add="1500">PLA Seda Brillante</button>
-                            <button class="option-btn" data-add="3000">Resina Ultra Detalle</button>
-                        </div>
-                    </div>
-
-                    <!-- Cantidad -->
-                    <div class="calc-group">
-                        <label class="calc-label"><i class="fa-solid fa-boxes-stacked" style="color: var(--accent-yellow);"></i> Cantidad</label>
-                        <div class="calc-options" id="opt-qty">
-                            <button class="option-btn active" data-qty="1">1 Unidad</button>
-                            <button class="option-btn" data-qty="3">3 Unidades (Desc. 10%)</button>
-                            <button class="option-btn" data-qty="10">10+ Unidades</button>
-                        </div>
-                    </div>
-
-                    <!-- Resultado & Enlace WA -->
-                    <div class="calc-result-box">
-                        <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">ESTIMACIÓN ESTIMADA:</div>
-                        <div class="price-estimate" id="calc-total-price">$4.500 - $6.000 ARS</div>
-                        <a href="#" id="btn-send-wa" target="_blank" class="btn-whatsapp-quote">
-                            <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> PEDIR COTIZACIÓN POR WHATSAPP
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICIOS -->
-    <section id="servicios" class="services">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Servicios</span>
+                <span class="section-tag">Especialidades</span>
                 <h2 class="section-title brand-font">¿QUÉ HACEMOS?</h2>
             </div>
             <div class="service-cards">
@@ -938,6 +742,7 @@
 
     <!-- GALERÍA -->
     <section id="galeria">
+        <canvas class="particles-canvas" data-colors="#f472b6,#38bdf8,#fde047"></canvas>
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Portafolio</span>
@@ -972,8 +777,9 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER / CONTACTO -->
     <footer id="contacto">
+        <canvas class="particles-canvas" data-colors="#fde047,#f472b6,#38bdf8"></canvas>
         <div class="container">
             <h2 class="brand-font">¿CONVERSAMOS?</h2>
             <p>Cotizá tu diseño o envianos tu archivo STL directamente por WhatsApp.</p>
@@ -999,58 +805,74 @@
         </div>
     </footer>
 
-    <!-- SCRIPT PARTICULAS & TRES.JS & COTIZADOR -->
+    <!-- SCRIPT TRES.JS (LOGO 3D) & PARTICULAS -->
     <script>
-        /* --- 1. VISOR 3D REAL CON THREE.JS --- */
-        function init3DViewer() {
+        /* --- VISOR 3D DEL LOGO CON THREE.JS --- */
+        function initLogo3DViewer() {
             const container = document.getElementById('viewer-container');
             const canvas = document.getElementById('webgl-canvas');
             
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.z = 5;
+            camera.position.z = 5.2;
 
             const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            // Geometría estilizada de un cristal/logo 3D
-            const geometry = new THREE.IcosahedronGeometry(1.4, 0);
+            // Cargar imagen de tu logo
+            const textureLoader = new THREE.TextureLoader();
+            const logoTexture = textureLoader.load('logoj.jpg');
+
+            // Crear el medallón/emblema 3D del logo
+            const geometry = new THREE.CylinderGeometry(1.5, 1.5, 0.18, 64);
             
-            // Materiales con efecto Pastel/Cristal Neón
-            const material = new THREE.MeshPhysicalMaterial({
+            // Materiales: Canto metálico pastel violeta + Caras con la imagen del logo
+            const rimMaterial = new THREE.MeshStandardMaterial({
                 color: 0xc084fc,
-                emissive: 0x2e1065,
+                metalness: 0.8,
                 roughness: 0.2,
-                metalness: 0.1,
-                transmission: 0.6,
-                transparent: true,
-                opacity: 0.9,
-                wireframe: false
+                emissive: 0x3b0764
             });
 
-            const mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
+            const faceMaterial = new THREE.MeshStandardMaterial({
+                map: logoTexture,
+                roughness: 0.35,
+                metalness: 0.1
+            });
 
-            // Anillo exterior rotatorio
-            const ringGeo = new THREE.TorusGeometry(2, 0.03, 16, 100);
-            const ringMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true });
-            const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-            scene.add(ringMesh);
+            const materials = [rimMaterial, faceMaterial, faceMaterial];
+            const logoMesh = new THREE.Mesh(geometry, materials);
+            
+            // Inclinación inicial para ver la cara frontal
+            logoMesh.rotation.x = Math.PI / 2.3;
+            scene.add(logoMesh);
 
-            // Luces pastel
-            const lightPink = new THREE.PointLight(0xf472b6, 2, 10);
-            lightPink.position.set(3, 3, 3);
+            // Anillos orbitales neón decorativos
+            const ringGeo1 = new THREE.TorusGeometry(2.2, 0.02, 16, 100);
+            const ringMat1 = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true });
+            const ringMesh1 = new THREE.Mesh(ringGeo1, ringMat1);
+            scene.add(ringMesh1);
+
+            const ringGeo2 = new THREE.TorusGeometry(2.5, 0.015, 16, 100);
+            const ringMat2 = new THREE.MeshBasicMaterial({ color: 0xf472b6 });
+            const ringMesh2 = new THREE.Mesh(ringGeo2, ringMat2);
+            ringMesh2.rotation.x = Math.PI / 3;
+            scene.add(ringMesh2);
+
+            // Luces Pastel
+            const lightPink = new THREE.PointLight(0xf472b6, 2.5, 10);
+            lightPink.position.set(3, 3, 4);
             scene.add(lightPink);
 
-            const lightCyan = new THREE.PointLight(0x38bdf8, 2, 10);
-            lightCyan.position.set(-3, -3, 3);
+            const lightCyan = new THREE.PointLight(0x38bdf8, 2.5, 10);
+            lightCyan.position.set(-3, -3, 4);
             scene.add(lightCyan);
 
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
             scene.add(ambientLight);
 
-            // Interactividad al arrastrar / touch
+            // Interacción táctil / Mouse
             let isDragging = false;
             let previousMousePosition = { x: 0, y: 0 };
 
@@ -1070,9 +892,9 @@
                     y: clientY - previousMousePosition.y
                 };
 
-                mesh.rotation.y += deltaMove.x * 0.01;
-                mesh.rotation.x += deltaMove.y * 0.01;
-                ringMesh.rotation.z += deltaMove.x * 0.005;
+                logoMesh.rotation.z += deltaMove.x * 0.01;
+                logoMesh.rotation.x += deltaMove.y * 0.01;
+                ringMesh1.rotation.z += deltaMove.x * 0.005;
 
                 previousMousePosition = { x: clientX, y: clientY };
             }
@@ -1087,87 +909,26 @@
             container.addEventListener('touchmove', onPointerMove, {passive: true});
             window.addEventListener('touchend', onPointerUp);
 
-            // Loop de Animación
             function animate() {
                 requestAnimationFrame(animate);
                 if (!isDragging) {
-                    mesh.rotation.y += 0.005;
-                    mesh.rotation.x += 0.002;
-                    ringMesh.rotation.z -= 0.003;
-                    ringMesh.rotation.x += 0.002;
+                    logoMesh.rotation.z += 0.008; // Rotación constante suave del logo
+                    ringMesh1.rotation.z -= 0.003;
+                    ringMesh2.rotation.y += 0.005;
                 }
                 renderer.render(scene, camera);
             }
             animate();
 
-            // Resize
             window.addEventListener('resize', () => {
                 camera.aspect = container.clientWidth / container.clientHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(container.clientWidth, container.clientHeight);
             });
         }
-        window.addEventListener('DOMContentLoaded', init3DViewer);
+        window.addEventListener('DOMContentLoaded', initLogo3DViewer);
 
-        /* --- 2. CALCULADORA DE PRESUPUESTO INTERACTIVA --- */
-        function initCalculator() {
-            const typeBtns = document.querySelectorAll('#opt-type .option-btn');
-            const sizeBtns = document.querySelectorAll('#opt-size .option-btn');
-            const matBtns = document.querySelectorAll('#opt-material .option-btn');
-            const qtyBtns = document.querySelectorAll('#opt-qty .option-btn');
-            
-            const totalPriceEl = document.getElementById('calc-total-price');
-            const sendWaBtn = document.getElementById('btn-send-wa');
-
-            function setupGroup(btns) {
-                btns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        btns.forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        calculate();
-                    });
-                });
-            }
-
-            setupGroup(typeBtns);
-            setupGroup(sizeBtns);
-            setupGroup(matBtns);
-            setupGroup(qtyBtns);
-
-            function calculate() {
-                const activeType = document.querySelector('#opt-type .option-btn.active');
-                const activeSize = document.querySelector('#opt-size .option-btn.active');
-                const activeMat = document.querySelector('#opt-material .option-btn.active');
-                const activeQty = document.querySelector('#opt-qty .option-btn.active');
-
-                const basePrice = parseFloat(activeType.dataset.price);
-                const mult = parseFloat(activeSize.dataset.mult);
-                const matAdd = parseFloat(activeMat.dataset.add);
-                const qty = parseInt(activeQty.dataset.qty);
-
-                let unitPrice = (basePrice * mult) + matAdd;
-                let total = unitPrice * qty;
-
-                if (qty === 3) total *= 0.9; // 10% desc
-
-                const minPrice = Math.round(total);
-                const maxPrice = Math.round(total * 1.25);
-
-                const formattedMin = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(minPrice);
-                const formattedMax = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(maxPrice);
-
-                totalPriceEl.textContent = `${formattedMin} - ${formattedMax}`;
-
-                // Generar Link WhatsApp
-                const text = `Hola Rumeko! Estuve probando el cotizador web y quiero consultar por:\n- *Pieza:* ${activeType.textContent}\n- *Tamaño:* ${activeSize.textContent}\n- *Material:* ${activeMat.textContent}\n- *Cantidad:* ${activeQty.textContent}\n- *Estimación:* ${formattedMin} a ${formattedMax}`;
-                sendWaBtn.href = `https://wa.me/5492474496130?text=${encodeURIComponent(text)}`;
-            }
-
-            calculate();
-        }
-        window.addEventListener('DOMContentLoaded', initCalculator);
-
-        /* --- 3. SISTEMA DE PARTÍCULAS BACKGROUND --- */
+        /* --- PARTICULAS DE FONDO --- */
         class GlowingParticle {
             constructor(cw, ch, colors) {
                 this.cw = cw;
@@ -1213,7 +974,7 @@
             }
             init() {
                 this.particles = [];
-                const count = Math.min(Math.floor((this.canvas.width * this.canvas.height) / 30000), 20);
+                const count = Math.min(Math.floor((this.canvas.width * this.canvas.height) / 30000), 18);
                 for (let i = 0; i < count; i++) {
                     this.particles.push(new GlowingParticle(this.canvas.width, this.canvas.height, this.colors));
                 }
