@@ -4,31 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rumeko | Estudio de Diseño & Impresión 3D</title>
-    <!-- Fonts: Outfit (Titulares) & Plus Jakarta Sans (Cuerpo) -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js CDN para el Visor 3D Interactivo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         :root {
-            --bg-dark: #07080e;
+            /* Paleta Oscura Premium */
+            --bg-dark: #08090e;
             --bg-card: rgba(255, 255, 255, 0.03);
             --bg-card-hover: rgba(255, 255, 255, 0.07);
-            --border-glass: rgba(255, 255, 255, 0.1);
-            --border-glow: rgba(0, 240, 255, 0.3);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            
+            /* Colores Pastel Neón (Inspirados en la marca) */
+            --accent-pink: #f472b6;     /* Rosa Pastel */
+            --accent-purple: #c084fc;   /* Violeta Pastel */
+            --accent-cyan: #38bdf8;     /* Celeste Pastel */
+            --accent-yellow: #fde047;   /* Amarillo Crema Pastel */
+            --border-glow: rgba(192, 132, 252, 0.35);
             
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             
-            --accent-pink: #ff75c3;
-            --accent-purple: #a855f7;
-            --accent-cyan: #00f0ff;
-            --accent-yellow: #ffbd59;
-            
-            --gradient-primary: linear-gradient(135deg, #ff75c3 0%, #a855f7 50%, #00f0ff 100%);
-            --gradient-text: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
+            --gradient-primary: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #38bdf8 100%);
+            --gradient-pastel-soft: linear-gradient(135deg, rgba(244,114,182,0.15), rgba(192,132,252,0.15));
         }
 
         * {
@@ -63,14 +67,14 @@
             pointer-events: none;
         }
 
-        /* --- NAVBAR RESPONSIVE --- */
+        /* --- NAVBAR --- */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(7, 8, 14, 0.85);
+            background: rgba(8, 9, 14, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 14px 5%;
@@ -85,7 +89,6 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: var(--text-main);
         }
 
         .logo-badge {
@@ -97,7 +100,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
             flex-shrink: 0;
         }
 
@@ -134,12 +137,12 @@
 
         .nav-links a:hover {
             color: var(--text-main);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
         }
 
         .nav-btn-mobile {
             display: none;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 30px;
             background: var(--gradient-primary);
             color: #fff;
@@ -148,15 +151,15 @@
             font-weight: 700;
         }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION CON VISOR 3D --- */
         header {
             position: relative;
             min-height: 100vh;
-            padding: 120px 5% 60px;
+            padding: 110px 5% 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.15) 0%, rgba(7, 8, 14, 1) 70%);
+            background: radial-gradient(circle at 75% 30%, rgba(192, 132, 252, 0.12) 0%, rgba(8, 9, 14, 1) 70%);
             overflow: hidden;
         }
 
@@ -174,12 +177,11 @@
 
         @media (min-width: 992px) {
             .hero-container {
-                grid-template-columns: 1.2fr 0.8fr;
-                gap: 60px;
+                grid-template-columns: 1.1fr 0.9fr;
+                gap: 50px;
             }
         }
 
-        /* Columna Izquierda */
         .hero-text-col {
             display: flex;
             flex-direction: column;
@@ -210,9 +212,8 @@
             box-shadow: 0 0 8px var(--accent-cyan);
         }
 
-        /* TIPOGRAFÍA FLUIDA (EVITA QUE SE CORTE EN MÓVIL) */
         .hero-title {
-            font-size: clamp(2.2rem, 5.5vw + 0.5rem, 4rem);
+            font-size: clamp(2.2rem, 5vw + 0.5rem, 3.8rem);
             font-weight: 800;
             line-height: 1.12;
             letter-spacing: -1px;
@@ -227,10 +228,10 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
             color: var(--text-muted);
             max-width: 580px;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
             line-height: 1.6;
         }
 
@@ -240,7 +241,7 @@
             gap: 14px;
             flex-wrap: wrap;
             width: 100%;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
 
         .btn-main {
@@ -248,23 +249,21 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 15px 32px;
+            padding: 15px 30px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
             text-decoration: none;
             color: #ffffff;
             background: var(--gradient-primary);
             border-radius: 50px;
-            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.35);
+            box-shadow: 0 10px 25px rgba(192, 132, 252, 0.35);
             transition: all 0.3s ease;
-            white-space: nowrap;
         }
 
         .btn-main:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 240, 255, 0.45);
+            box-shadow: 0 15px 35px rgba(244, 114, 182, 0.45);
         }
 
         .btn-secondary {
@@ -272,9 +271,9 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 15px 26px;
+            padding: 15px 24px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             font-weight: 600;
             text-decoration: none;
             color: var(--text-main);
@@ -283,7 +282,6 @@
             border-radius: 50px;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            white-space: nowrap;
         }
 
         .btn-secondary:hover {
@@ -298,7 +296,7 @@
             gap: 20px;
             width: 100%;
             border-top: 1px solid var(--border-glass);
-            padding-top: 25px;
+            padding-top: 22px;
             flex-wrap: wrap;
         }
 
@@ -309,76 +307,78 @@
 
         .stat-num {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
             color: var(--text-main);
-            line-height: 1.2;
         }
 
         .stat-desc {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-muted);
-            font-weight: 500;
         }
 
         .stat-divider {
             width: 1px;
-            height: 30px;
+            height: 28px;
             background: var(--border-glass);
         }
 
-        /* Columna Derecha (Visual) */
+        /* VISOR 3D CONTENEDOR */
         .hero-visual-col {
             position: relative;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 100%;
-            padding: 20px 0;
         }
 
-        .visual-glow-bg {
-            position: absolute;
-            width: clamp(200px, 40vw, 320px);
-            height: clamp(200px, 40vw, 320px);
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            filter: blur(70px);
-            opacity: 0.35;
-            animation: pulseGlow 6s infinite alternate ease-in-out;
-        }
-
-        @keyframes pulseGlow {
-            0% { transform: scale(0.85); opacity: 0.25; }
-            100% { transform: scale(1.1); opacity: 0.45; }
-        }
-
-        .mascot-frame {
+        .viewer-3d-wrapper {
             position: relative;
-            z-index: 2;
-            width: clamp(180px, 35vw, 250px);
-            height: clamp(180px, 35vw, 250px);
-            border-radius: 50%;
-            padding: 3px;
-            background: var(--gradient-primary);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            animation: floatMascot 5s ease-in-out infinite;
+            width: 100%;
+            max-width: 380px;
+            height: 380px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glow);
+            border-radius: 28px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(192, 132, 252, 0.1);
+            overflow: hidden;
+            cursor: grab;
         }
 
-        @keyframes floatMascot {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+        .viewer-3d-wrapper:active {
+            cursor: grabbing;
         }
 
-        .mascot-frame img {
+        #webgl-canvas {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            background: #000;
+            display: block;
         }
 
-        /* Floating Chips Adaptados */
+        .viewer-hint {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(8, 9, 14, 0.75);
+            border: 1px solid var(--border-glass);
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            letter-spacing: 0.5px;
+            pointer-events: none;
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        /* Floating Chips */
         .floating-chip {
             position: absolute;
             z-index: 3;
@@ -388,7 +388,7 @@
             padding: 8px 16px;
             border-radius: 50px;
             font-family: 'Outfit', sans-serif;
-            font-size: clamp(0.75rem, 1.2vw, 0.88rem);
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-main);
             display: flex;
@@ -398,30 +398,142 @@
             white-space: nowrap;
         }
 
-        .chip-1 {
-            top: 0px;
-            left: 5%;
-            animation: floatChip 4s ease-in-out infinite 0.5s;
-        }
+        .chip-1 { top: -10px; left: -10px; animation: float 4s infinite ease-in-out; }
+        .chip-2 { bottom: 10px; right: -10px; animation: float 4.5s infinite ease-in-out 1s; }
 
-        .chip-2 {
-            bottom: 10px;
-            right: 5%;
-            animation: floatChip 4.5s ease-in-out infinite 1s;
-        }
-
-        .chip-3 {
-            bottom: -15px;
-            left: 15%;
-            animation: floatChip 3.8s ease-in-out infinite 0.2s;
-        }
-
-        @keyframes floatChip {
+        @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
         }
 
-        /* --- SECCIONES REUTILIZABLES --- */
+        /* --- SECCIÓN CALCULADORA / COTIZADOR --- */
+        .calculator-section {
+            background: radial-gradient(circle at 30% 50%, rgba(244, 114, 182, 0.08) 0%, transparent 60%);
+            border-top: 1px solid var(--border-glass);
+            padding: 80px 5%;
+        }
+
+        .calculator-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            padding: clamp(20px, 4vw, 40px);
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .calc-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .calc-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .calc-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+
+        .option-btn:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-main);
+        }
+
+        .option-btn.active {
+            background: rgba(192, 132, 252, 0.15);
+            border-color: var(--accent-purple);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
+        }
+
+        .calc-result-box {
+            grid-column: 1 / -1;
+            background: rgba(8, 9, 14, 0.6);
+            border: 1px solid var(--border-glass);
+            border-radius: 18px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .price-estimate {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--accent-yellow);
+            text-shadow: 0 0 15px rgba(253, 224, 71, 0.3);
+        }
+
+        .btn-whatsapp-quote {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: #25D366;
+            color: #000;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .btn-whatsapp-quote:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        /* --- SERVICIOS & GALERÍA --- */
         section {
             position: relative;
             padding: 80px 5%;
@@ -441,13 +553,11 @@
         }
 
         .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
             font-weight: 800;
-            letter-spacing: 0.5px;
             background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: inline-block;
         }
 
         .section-tag {
@@ -456,14 +566,8 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--accent-cyan);
+            color: var(--accent-pink);
             margin-bottom: 8px;
-        }
-
-        /* --- SERVICIOS --- */
-        .services {
-            background: radial-gradient(circle at 20% 50%, rgba(82, 113, 255, 0.08) 0%, transparent 50%);
-            border-top: 1px solid var(--border-glass);
         }
 
         .service-cards {
@@ -475,10 +579,9 @@
         .card {
             background: var(--bg-card);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border-glass);
             border-radius: 20px;
-            padding: 30px 24px;
+            padding: 28px 22px;
             transition: all 0.3s ease;
         }
 
@@ -486,44 +589,25 @@
             transform: translateY(-6px);
             background: var(--bg-card-hover);
             border-color: var(--border-glow);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(192, 132, 252, 0.15);
         }
 
         .card-icon {
-            width: 55px;
-            height: 55px;
+            width: 52px;
+            height: 52px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
+            margin-bottom: 18px;
+            font-size: 1.3rem;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-glass);
         }
 
-        .card:nth-child(1) .card-icon { color: var(--accent-pink); border-color: rgba(255,117,195,0.3); }
-        .card:nth-child(2) .card-icon { color: var(--accent-purple); border-color: rgba(168,85,247,0.3); }
-        .card:nth-child(3) .card-icon { color: var(--accent-cyan); border-color: rgba(0,240,255,0.3); }
-
-        .card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-main);
-        }
-
-        .card p {
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* --- GALERÍA --- */
-        .gallery-section {
-            background: radial-gradient(circle at 80% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
-            border-top: 1px solid var(--border-glass);
-        }
+        .card:nth-child(1) .card-icon { color: var(--accent-pink); border-color: rgba(244,114,182,0.3); }
+        .card:nth-child(2) .card-icon { color: var(--accent-purple); border-color: rgba(192,132,252,0.3); }
+        .card:nth-child(3) .card-icon { color: var(--accent-cyan); border-color: rgba(56,189,248,0.3); }
 
         .gallery-grid {
             display: grid;
@@ -542,7 +626,7 @@
 
         .gallery-item:hover {
             transform: translateY(-5px);
-            border-color: rgba(255, 117, 195, 0.4);
+            border-color: rgba(244, 114, 182, 0.4);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
         }
 
@@ -567,19 +651,19 @@
         .gallery-item p {
             margin-top: 10px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             text-align: center;
             color: var(--text-main);
         }
 
-        /* --- FOOTER / CONTACTO --- */
+        /* --- FOOTER --- */
         footer {
             position: relative;
             overflow: hidden;
-            background: radial-gradient(circle at 50% 0%, rgba(255, 189, 89, 0.08) 0%, rgba(7, 8, 14, 1) 80%);
+            background: radial-gradient(circle at 50% 0%, rgba(253, 224, 71, 0.08) 0%, rgba(8, 9, 14, 1) 80%);
             border-top: 1px solid var(--border-glass);
-            padding: 70px 5% 30px;
+            padding: 60px 5% 30px;
             text-align: center;
         }
 
@@ -587,14 +671,9 @@
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 800;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #ffffff 0%, #ffd43b 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #fde047 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        footer p {
-            color: var(--text-muted);
-            font-size: 0.98rem;
         }
 
         .whatsapp-options {
@@ -602,19 +681,19 @@
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
-            margin: 30px 0 35px;
+            margin: 25px 0 30px;
         }
 
         .btn-whatsapp {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 26px;
+            padding: 12px 24px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-glass);
             border-radius: 50px;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-main);
             text-decoration: none;
@@ -632,13 +711,13 @@
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .social-badge {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-glass);
-            padding: 10px 24px;
+            padding: 10px 22px;
             border-radius: 50px;
             display: flex;
             align-items: center;
@@ -646,76 +725,45 @@
             text-decoration: none;
             color: var(--text-main);
             font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .social-badge:hover {
-            background: rgba(225, 48, 108, 0.15);
-            border-color: rgba(225, 48, 108, 0.5);
+            background: rgba(244, 114, 182, 0.15);
+            border-color: rgba(244, 114, 182, 0.5);
             transform: translateY(-2px);
         }
 
         .copyright {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
             border-top: 1px solid var(--border-glass);
-            padding-top: 25px;
+            padding-top: 22px;
             max-width: 500px;
             margin: 0 auto;
         }
 
-        /* --- RESPONSIVE ESPECÍFICO PARA CELULARES --- */
+        /* --- RESPONSIVE MÓVIL --- */
         @media (max-width: 768px) {
-            header {
-                padding-top: 100px;
-            }
-
-            .nav-links {
-                display: none; /* Se oculta la lista en celulares para limpiar el header */
-            }
-
-            .nav-btn-mobile {
-                display: inline-block; /* Botón de contacto compacto en navbar móvil */
-            }
-
-            .hero-text-col {
-                align-items: center;
-                text-align: center;
-            }
-
-            .hero-subtitle {
-                margin-inline: auto;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .btn-main, .btn-secondary {
-                width: 100%;
-            }
-
-            .hero-stats {
-                justify-content: space-around;
-                gap: 15px;
-            }
-
-            .stat-divider {
-                display: none;
-            }
-
-            .chip-1 { top: -10px; left: 0%; }
-            .chip-2 { bottom: -10px; right: 0%; }
-            .chip-3 { display: none; } /* Ocultamos el 3er chip en celular para dar aire */
+            .nav-links { display: none; }
+            .nav-btn-mobile { display: inline-block; }
+            .hero-text-col { align-items: center; text-align: center; }
+            .hero-subtitle { margin-inline: auto; }
+            .hero-actions { flex-direction: column; }
+            .btn-main, .btn-secondary { width: 100%; }
+            .hero-stats { justify-content: space-around; }
+            .stat-divider { display: none; }
+            .viewer-3d-wrapper { max-width: 320px; height: 320px; }
+            .chip-1 { top: -15px; left: 0%; }
+            .chip-2 { bottom: -15px; right: 0%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR RESPONSIVE -->
+    <!-- NAVBAR -->
     <nav>
         <a href="#" class="logo-container">
             <div class="logo-badge">
@@ -725,6 +773,7 @@
         </a>
         <ul class="nav-links">
             <li><a href="#">Inicio</a></li>
+            <li><a href="#cotizador">Cotizador</a></li>
             <li><a href="#servicios">Servicios</a></li>
             <li><a href="#galeria">Galería</a></li>
             <li><a href="#contacto">Contacto</a></li>
@@ -732,28 +781,27 @@
         <a href="#contacto" class="nav-btn-mobile brand-font">Contacto</a>
     </nav>
 
-    <!-- HERO SECTION OPTIMIZADO PARA MÓVIL -->
+    <!-- HERO SECTION CON VISOR 3D REAL -->
     <header>
-        <canvas class="particles-canvas" data-colors="#ff75c3,#a855f7,#00f0ff,#ffbd59"></canvas>
+        <canvas class="particles-canvas" data-colors="#f472b6,#c084fc,#38bdf8,#fde047"></canvas>
         <div class="hero-container">
             
-            <!-- Columna Texto -->
             <div class="hero-text-col">
                 <div class="badge-pill">
-                    <span class="badge-dot"></span> FABRICACIÓN ADITIVA & DISEÑO
+                    <span class="badge-dot"></span> ESTUDIO DE IMPRESIÓN 3D
                 </div>
                 <h1 class="hero-title brand-font">
                     Materializamos ideas en <span class="gradient-span">piezas reales.</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Modelado CAD personalizado, coleccionables Fan Art, accesorios tecnológicos y regalos únicos con acabados de alta precisión.
+                    Modelado CAD personalizado, figuras de colección, accesorios tech y soluciones técnicas con acabados de precisión en tonos pastel y neón.
                 </p>
                 <div class="hero-actions">
-                    <a href="#galeria" class="btn-main">
-                        EXPLORAR TRABAJOS <i class="fa-solid fa-arrow-right"></i>
+                    <a href="#cotizador" class="btn-main">
+                        <i class="fa-solid fa-calculator"></i> COTIZAR AL INSTANTE
                     </a>
                     <a href="#contacto" class="btn-secondary">
-                        <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> COTIZAR AHORA
+                        <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> CONSULTA DIRECTA
                     </a>
                 </div>
 
@@ -770,84 +818,147 @@
                     <div class="stat-divider"></div>
                     <div class="stat-item">
                         <span class="stat-num">CAD 3D</span>
-                        <span class="stat-desc">Modelado</span>
+                        <span class="stat-desc">Modelado HD</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Columna Visual Adaptativa -->
+            <!-- VISOR 3D INTERACTIVO -->
             <div class="hero-visual-col">
-                <div class="visual-glow-bg"></div>
-                <div class="mascot-frame">
-                    <img src="logoj.jpg" alt="Rumeko Mascot">
+                <div class="viewer-3d-wrapper" id="viewer-container">
+                    <canvas id="webgl-canvas"></canvas>
+                    <div class="viewer-hint">
+                        <i class="fa-solid fa-hand-pointer"></i> Arrastrá para rotar en 3D
+                    </div>
                 </div>
 
                 <div class="floating-chip chip-1">
-                    <i class="fa-solid fa-cube" style="color: var(--accent-cyan);"></i> Impresión HD
+                    <i class="fa-solid fa-cubes" style="color: var(--accent-pink);"></i> Impresión HD
                 </div>
                 <div class="floating-chip chip-2">
-                    <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-pink);"></i> Fan Art
-                </div>
-                <div class="floating-chip chip-3">
-                    <i class="fa-solid fa-pen-ruler" style="color: var(--accent-yellow);"></i> Diseño CAD
+                    <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-cyan);"></i> Render 3D
                 </div>
             </div>
 
         </div>
     </header>
 
-    <!-- SERVICIOS SECTION -->
-    <section id="servicios" class="services">
-        <canvas class="particles-canvas" data-colors="#a855f7,#00f0ff,#74c0fc"></canvas>
+    <!-- COTIZADOR / CALCULADORA INSTANTÁNEA -->
+    <section id="cotizador" class="calculator-section">
+        <canvas class="particles-canvas" data-colors="#c084fc,#f472b6,#38bdf8"></canvas>
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Especialidades</span>
-                <h2 class="section-title brand-font">¿QUÉ CREAMOS?</h2>
+                <span class="section-tag">Presupuesto Express</span>
+                <h2 class="section-title brand-font">COTIZADOR INSTANTÁNEO</h2>
             </div>
-            <div class="service-cards">
-                <div class="card">
-                    <div class="card-icon"><i class="fa-solid fa-pen-ruler"></i></div>
-                    <h3 class="brand-font">Diseño 3D Avanzado</h3>
-                    <p>Modelado CAD e ingenieril personalizado. Llevamos tus ideas conceptuales a modelos digitales precisos.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fa-solid fa-cube"></i></div>
-                    <h3 class="brand-font">Impresión Premium</h3>
-                    <p>Fabricación aditiva con acabados impecables, materiales ecológicos de grado técnico y alta durabilidad.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                    <h3 class="brand-font">Piezas & Coleccionables</h3>
-                    <p>Prototipos, figuras de colección, accesorios tech y arte decorativo exclusivo hecho a medida.</p>
+
+            <div class="calculator-card">
+                <div class="calc-grid">
+                    
+                    <!-- Tipo de Proyecto -->
+                    <div class="calc-group">
+                        <label class="calc-label"><i class="fa-solid fa-layer-group" style="color: var(--accent-pink);"></i> Tipo de Pieza</label>
+                        <div class="calc-options" id="opt-type">
+                            <button class="option-btn active" data-value="fanart" data-price="4500">Figura / Funko</button>
+                            <button class="option-btn" data-value="tecnica" data-price="3500">Pieza Técnica</button>
+                            <button class="option-btn" data-value="accesorio" data-price="2000">Llavero / Accesorio</button>
+                        </div>
+                    </div>
+
+                    <!-- Tamaño -->
+                    <div class="calc-group">
+                        <label class="calc-label"><i class="fa-solid fa-ruler-combined" style="color: var(--accent-cyan);"></i> Tamaño Aprox.</label>
+                        <div class="calc-options" id="opt-size">
+                            <button class="option-btn active" data-mult="1">Chico (~5-8 cm)</button>
+                            <button class="option-btn" data-mult="1.8">Mediano (~12-15 cm)</button>
+                            <button class="option-btn" data-mult="3.2">Grande (~20+ cm)</button>
+                        </div>
+                    </div>
+
+                    <!-- Material / Acabado -->
+                    <div class="calc-group">
+                        <label class="calc-label"><i class="fa-solid fa-palette" style="color: var(--accent-purple);"></i> Material & Acabado</label>
+                        <div class="calc-options" id="opt-material">
+                            <button class="option-btn active" data-add="0">PLA Estándar Pastel</button>
+                            <button class="option-btn" data-add="1500">PLA Seda Brillante</button>
+                            <button class="option-btn" data-add="3000">Resina Ultra Detalle</button>
+                        </div>
+                    </div>
+
+                    <!-- Cantidad -->
+                    <div class="calc-group">
+                        <label class="calc-label"><i class="fa-solid fa-boxes-stacked" style="color: var(--accent-yellow);"></i> Cantidad</label>
+                        <div class="calc-options" id="opt-qty">
+                            <button class="option-btn active" data-qty="1">1 Unidad</button>
+                            <button class="option-btn" data-qty="3">3 Unidades (Desc. 10%)</button>
+                            <button class="option-btn" data-qty="10">10+ Unidades</button>
+                        </div>
+                    </div>
+
+                    <!-- Resultado & Enlace WA -->
+                    <div class="calc-result-box">
+                        <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">ESTIMACIÓN ESTIMADA:</div>
+                        <div class="price-estimate" id="calc-total-price">$4.500 - $6.000 ARS</div>
+                        <a href="#" id="btn-send-wa" target="_blank" class="btn-whatsapp-quote">
+                            <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> PEDIR COTIZACIÓN POR WHATSAPP
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- GALERÍA SECTION -->
-    <section id="galeria" class="gallery-section">
-        <canvas class="particles-canvas" data-colors="#a855f7,#ff75c3,#eebefa"></canvas>
+    <!-- SERVICIOS -->
+    <section id="servicios" class="services">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Showcase</span>
-                <h2 class="section-title brand-font">PROYECTOS DESTACADOS</h2>
+                <span class="section-tag">Servicios</span>
+                <h2 class="section-title brand-font">¿QUÉ HACEMOS?</h2>
+            </div>
+            <div class="service-cards">
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                    <h3 class="brand-font">Diseño 3D CAD</h3>
+                    <p>Modelado técnico e ingenieril a medida. Transformamos tus bocetos en archivos imprimibles de alta precisión.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-cube"></i></div>
+                    <h3 class="brand-font">Impresión Premium</h3>
+                    <p>Fabricación aditiva con materiales biodegradables de colores pastel y neón, con acabados superficiales suaves.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3 class="brand-font">Coleccionables & Tech</h3>
+                    <p>Figuras Funko customizadas, prototipos funcionales, organizadores y soportes para tu setup gamer o de oficina.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="galeria">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Portafolio</span>
+                <h2 class="section-title brand-font">TRABAJOS DESTACADOS</h2>
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item">
                     <div class="gallery-img-wrapper">
-                        <img class="gallery-img" src="https://files.cults3d.com/uploaders/26879544/illustration-file/e88b02bd-a4fb-487b-ae90-ef83bef8cba0/Imagen-de-WhatsApp-2023-05-29-a-las-17.24.25.jpg" alt="FunkoPoP">
+                        <img class="gallery-img" src="https://files.cults3d.com/uploaders/26879544/illustration-file/e88b02bd-a4fb-487b-ae90-ef83bef8cba0/Imagen-de-WhatsApp-2023-05-29-a-las-17.24.25.jpg" alt="Funko">
                     </div>
                     <p>FUNKO POPS CUSTOM</p>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-wrapper">
-                        <img class="gallery-img" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Figura 3D">
+                        <img class="gallery-img" src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Figura">
                     </div>
                     <p>FIGURAS ARTÍSTICAS</p>
                 </div>
                 <div class="gallery-item">
                     <div class="gallery-img-wrapper">
-                        <img class="gallery-img" src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Soporte Tech">
+                        <img class="gallery-img" src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Soporte">
                     </div>
                     <p>SOPORTES TECH</p>
                 </div>
@@ -855,178 +966,270 @@
                     <div class="gallery-img-wrapper">
                         <img class="gallery-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Llaveros">
                     </div>
-                    <p>ACCESORIOS TECH</p>
+                    <p>ACCESORIOS & LLAVEROS</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER / CONTACTO SECTION -->
+    <!-- FOOTER -->
     <footer id="contacto">
-        <canvas class="particles-canvas" data-colors="#ffbd59,#00f0ff,#ff75c3"></canvas>
         <div class="container">
-            <h2 class="brand-font">¿LISTO PARA CREAR?</h2>
-            <p>Escribinos directamente y cotizá tu proyecto en minutos.</p>
+            <h2 class="brand-font">¿CONVERSAMOS?</h2>
+            <p>Cotizá tu diseño o envianos tu archivo STL directamente por WhatsApp.</p>
 
             <div class="whatsapp-options">
                 <a href="https://wa.me/5492474496130" target="_blank" class="btn-whatsapp">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem; color: #25D366;"></i> Danilo
+                    <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.1rem;"></i> Danilo
                 </a>
                 <a href="https://wa.me/5492474406497" target="_blank" class="btn-whatsapp">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem; color: #25D366;"></i> Camila
+                    <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.1rem;"></i> Camila
                 </a>
             </div>
 
             <div class="social-bar">
                 <a href="https://www.instagram.com/rumekolab" target="_blank" class="social-badge">
-                    <i class="fa-brands fa-instagram" style="font-size: 1.2rem; color: #E1306C;"></i> @rumekolab
+                    <i class="fa-brands fa-instagram" style="color: var(--accent-pink); font-size: 1.1rem;"></i> @rumekolab
                 </a>
             </div>
 
             <div class="copyright">
-                © 2026 Rumeko. Todos los derechos reservados.
+                © 2026 Rumeko Studio. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
-    <!-- SCRIPT DE PARTÍCULAS OPTIMIZADO -->
+    <!-- SCRIPT PARTICULAS & TRES.JS & COTIZADOR -->
     <script>
-        class GlowingParticle {
-            constructor(canvasWidth, canvasHeight, colors) {
-                this.canvasWidth = canvasWidth;
-                this.canvasHeight = canvasHeight;
-                this.x = Math.random() * canvasWidth;
-                this.y = Math.random() * canvasHeight;
-                this.size = Math.random() * 5 + 3;
-                this.speedY = Math.random() * -0.5 - 0.2;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
+        /* --- 1. VISOR 3D REAL CON THREE.JS --- */
+        function init3DViewer() {
+            const container = document.getElementById('viewer-container');
+            const canvas = document.getElementById('webgl-canvas');
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 5;
 
-                const shapes = ['ring', 'diamond', 'star', 'circle'];
-                this.shape = shapes[Math.floor(Math.random() * shapes.length)];
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-                this.angle = Math.random() * Math.PI * 2;
-                this.spin = (Math.random() - 0.5) * 0.02;
-                this.opacity = Math.random() * 0.5 + 0.3;
+            // Geometría estilizada de un cristal/logo 3D
+            const geometry = new THREE.IcosahedronGeometry(1.4, 0);
+            
+            // Materiales con efecto Pastel/Cristal Neón
+            const material = new THREE.MeshPhysicalMaterial({
+                color: 0xc084fc,
+                emissive: 0x2e1065,
+                roughness: 0.2,
+                metalness: 0.1,
+                transmission: 0.6,
+                transparent: true,
+                opacity: 0.9,
+                wireframe: false
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            // Anillo exterior rotatorio
+            const ringGeo = new THREE.TorusGeometry(2, 0.03, 16, 100);
+            const ringMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true });
+            const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+            scene.add(ringMesh);
+
+            // Luces pastel
+            const lightPink = new THREE.PointLight(0xf472b6, 2, 10);
+            lightPink.position.set(3, 3, 3);
+            scene.add(lightPink);
+
+            const lightCyan = new THREE.PointLight(0x38bdf8, 2, 10);
+            lightCyan.position.set(-3, -3, 3);
+            scene.add(lightCyan);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+
+            // Interactividad al arrastrar / touch
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+
+            function onPointerDown(e) {
+                isDragging = true;
+                previousMousePosition = { x: e.clientX || e.touches[0].clientX, y: e.clientY || e.touches[0].clientY };
             }
 
+            function onPointerMove(e) {
+                if (!isDragging) return;
+                const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+                if (!clientX || !clientY) return;
+
+                const deltaMove = {
+                    x: clientX - previousMousePosition.x,
+                    y: clientY - previousMousePosition.y
+                };
+
+                mesh.rotation.y += deltaMove.x * 0.01;
+                mesh.rotation.x += deltaMove.y * 0.01;
+                ringMesh.rotation.z += deltaMove.x * 0.005;
+
+                previousMousePosition = { x: clientX, y: clientY };
+            }
+
+            function onPointerUp() { isDragging = false; }
+
+            container.addEventListener('mousedown', onPointerDown);
+            container.addEventListener('mousemove', onPointerMove);
+            window.addEventListener('mouseup', onPointerUp);
+
+            container.addEventListener('touchstart', onPointerDown, {passive: true});
+            container.addEventListener('touchmove', onPointerMove, {passive: true});
+            window.addEventListener('touchend', onPointerUp);
+
+            // Loop de Animación
+            function animate() {
+                requestAnimationFrame(animate);
+                if (!isDragging) {
+                    mesh.rotation.y += 0.005;
+                    mesh.rotation.x += 0.002;
+                    ringMesh.rotation.z -= 0.003;
+                    ringMesh.rotation.x += 0.002;
+                }
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Resize
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
+        window.addEventListener('DOMContentLoaded', init3DViewer);
+
+        /* --- 2. CALCULADORA DE PRESUPUESTO INTERACTIVA --- */
+        function initCalculator() {
+            const typeBtns = document.querySelectorAll('#opt-type .option-btn');
+            const sizeBtns = document.querySelectorAll('#opt-size .option-btn');
+            const matBtns = document.querySelectorAll('#opt-material .option-btn');
+            const qtyBtns = document.querySelectorAll('#opt-qty .option-btn');
+            
+            const totalPriceEl = document.getElementById('calc-total-price');
+            const sendWaBtn = document.getElementById('btn-send-wa');
+
+            function setupGroup(btns) {
+                btns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        btns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        calculate();
+                    });
+                });
+            }
+
+            setupGroup(typeBtns);
+            setupGroup(sizeBtns);
+            setupGroup(matBtns);
+            setupGroup(qtyBtns);
+
+            function calculate() {
+                const activeType = document.querySelector('#opt-type .option-btn.active');
+                const activeSize = document.querySelector('#opt-size .option-btn.active');
+                const activeMat = document.querySelector('#opt-material .option-btn.active');
+                const activeQty = document.querySelector('#opt-qty .option-btn.active');
+
+                const basePrice = parseFloat(activeType.dataset.price);
+                const mult = parseFloat(activeSize.dataset.mult);
+                const matAdd = parseFloat(activeMat.dataset.add);
+                const qty = parseInt(activeQty.dataset.qty);
+
+                let unitPrice = (basePrice * mult) + matAdd;
+                let total = unitPrice * qty;
+
+                if (qty === 3) total *= 0.9; // 10% desc
+
+                const minPrice = Math.round(total);
+                const maxPrice = Math.round(total * 1.25);
+
+                const formattedMin = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(minPrice);
+                const formattedMax = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(maxPrice);
+
+                totalPriceEl.textContent = `${formattedMin} - ${formattedMax}`;
+
+                // Generar Link WhatsApp
+                const text = `Hola Rumeko! Estuve probando el cotizador web y quiero consultar por:\n- *Pieza:* ${activeType.textContent}\n- *Tamaño:* ${activeSize.textContent}\n- *Material:* ${activeMat.textContent}\n- *Cantidad:* ${activeQty.textContent}\n- *Estimación:* ${formattedMin} a ${formattedMax}`;
+                sendWaBtn.href = `https://wa.me/5492474496130?text=${encodeURIComponent(text)}`;
+            }
+
+            calculate();
+        }
+        window.addEventListener('DOMContentLoaded', initCalculator);
+
+        /* --- 3. SISTEMA DE PARTÍCULAS BACKGROUND --- */
+        class GlowingParticle {
+            constructor(cw, ch, colors) {
+                this.cw = cw;
+                this.ch = ch;
+                this.x = Math.random() * cw;
+                this.y = Math.random() * ch;
+                this.size = Math.random() * 4 + 2;
+                this.speedY = Math.random() * -0.4 - 0.1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.opacity = Math.random() * 0.4 + 0.2;
+            }
             update() {
                 this.y += this.speedY;
-                this.x += this.speedX;
-                this.angle += this.spin;
-
-                if (this.y < -20) {
-                    this.y = this.canvasHeight + 20;
-                    this.x = Math.random() * this.canvasWidth;
+                if (this.y < -10) {
+                    this.y = this.ch + 10;
+                    this.x = Math.random() * this.cw;
                 }
             }
-
             draw(ctx) {
                 ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle);
-
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = this.color;
-                ctx.fillStyle = this.color;
-                ctx.strokeStyle = this.color;
                 ctx.globalAlpha = this.opacity;
-                ctx.lineWidth = 1.2;
-
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
                 ctx.beginPath();
-                const s = this.size;
-
-                switch (this.shape) {
-                    case 'circle':
-                        ctx.arc(0, 0, s * 0.6, 0, Math.PI * 2);
-                        ctx.fill();
-                        break;
-                    case 'ring':
-                        ctx.arc(0, 0, s, 0, Math.PI * 2);
-                        ctx.stroke();
-                        break;
-                    case 'diamond':
-                        ctx.moveTo(0, -s * 1.2);
-                        ctx.lineTo(s * 0.8, 0);
-                        ctx.lineTo(0, s * 1.2);
-                        ctx.lineTo(-s * 0.8, 0);
-                        ctx.closePath();
-                        ctx.stroke();
-                        break;
-                    case 'star':
-                        for (let i = 0; i < 4; i++) {
-                            ctx.lineTo(Math.cos((i * 90) * Math.PI / 180) * s, Math.sin((i * 90) * Math.PI / 180) * s);
-                            ctx.lineTo(Math.cos((45 + i * 90) * Math.PI / 180) * (s * 0.3), Math.sin((45 + i * 90) * Math.PI / 180) * (s * 0.3));
-                        }
-                        ctx.closePath();
-                        ctx.fill();
-                        break;
-                }
-
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
                 ctx.restore();
             }
         }
 
-        class SectionParticleSystem {
+        class ParticleSystem {
             constructor(canvas) {
                 this.canvas = canvas;
                 this.ctx = canvas.getContext('2d');
                 this.colors = canvas.getAttribute('data-colors').split(',');
-                this.particles = [];
-                
                 this.resize();
                 this.init();
             }
-
             resize() {
-                const parent = this.canvas.parentElement;
-                this.canvas.width = parent.offsetWidth;
-                this.canvas.height = parent.offsetHeight;
+                this.canvas.width = this.canvas.parentElement.offsetWidth;
+                this.canvas.height = this.canvas.parentElement.offsetHeight;
             }
-
             init() {
                 this.particles = [];
-                const area = this.canvas.width * this.canvas.height;
-                // Ajuste de densidad para mejor rendimiento móvil
-                const particleCount = Math.min(Math.floor(area / 25000), 22);
-
-                for (let i = 0; i < particleCount; i++) {
+                const count = Math.min(Math.floor((this.canvas.width * this.canvas.height) / 30000), 20);
+                for (let i = 0; i < count; i++) {
                     this.particles.push(new GlowingParticle(this.canvas.width, this.canvas.height, this.colors));
                 }
             }
-
-            updateAndDraw() {
+            render() {
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                this.particles.forEach(p => {
-                    p.update();
-                    p.draw(this.ctx);
-                });
+                this.particles.forEach(p => { p.update(); p.draw(this.ctx); });
             }
         }
 
-        const particleCanvases = document.querySelectorAll('.particles-canvas');
-        const systems = [];
-
-        particleCanvases.forEach(canvas => {
-            systems.push(new SectionParticleSystem(canvas));
-        });
-
-        function animate() {
-            systems.forEach(system => system.updateAndDraw());
-            requestAnimationFrame(animate);
+        const systems = Array.from(document.querySelectorAll('.particles-canvas')).map(c => new ParticleSystem(c));
+        function loop() {
+            systems.forEach(s => s.render());
+            requestAnimationFrame(loop);
         }
-        animate();
-
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                systems.forEach(system => {
-                    system.resize();
-                    system.init();
-                });
-            }, 150);
-        });
+        loop();
     </script>
 </body>
 </html>
